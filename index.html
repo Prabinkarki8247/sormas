@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CV | Prabin Karki</title>
 <style>
-:root{--ink:#12262e;--mute:#566a72;--line:#dbe3e2;--acc:#0b5d63;--tint:#e3eeee;--sig:#c8821a}
+:root{--ink:#12262e;--mute:#566a72;--line:#dbe3e2;--acc:#0b5d63;--tint:#e3eeee;--sig:#c8821a;--bw:460px;--bh:330px;--bs:1}
 *{box-sizing:border-box}
 body{margin:0;background:#fff;color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.15;margin:0 0 .3em}
@@ -20,54 +20,67 @@ nav a.glow-button{color:#F7F8F5;background:rgba(22,125,141,.18);border-color:rgb
 
 /* ---- 3D world ---- */
 #space{width:1px}
-#stage{position:fixed;inset:0;overflow:hidden;perspective:800px;background:#fff}
+#stage{position:fixed;inset:0;overflow:hidden;perspective:800px;background:linear-gradient(#fff,#f1f5f5)}
 #world{position:absolute;left:50%;top:52%;width:0;height:0;transform-style:preserve-3d;will-change:transform}
 #world>*{position:absolute;left:0;top:0;transform-style:preserve-3d}
 .g i{position:absolute;left:0;top:0;display:block;transform-origin:0 0}
-.fl{width:500px;height:104px;transform:translate3d(-250px,170px,-100px) rotateX(90deg);border-top:1px solid #cdd6d6;
- background:linear-gradient(90deg,#cfd7d7 1px,transparent 1px) 0 0/62.5px 100%,#e9eded}
-.fl .fp{position:absolute;left:190px;width:120px;top:0;height:72px;background:#0b5d63;border-radius:4px}
-.fl::before,.fl::after{content:"";position:absolute;top:0;bottom:0;width:6px;background:radial-gradient(circle,#d79a2e 2.5px,transparent 3.5px) 0 0/6px 50px}
+.fl{width:500px;height:104px;transform:translate3d(-250px,170px,-100px) rotateX(90deg);
+ background:linear-gradient(90deg,#d5dcdc 1px,transparent 1px) 0 0/62.5px 100%,linear-gradient(90deg,#e4e9e9,#f3f5f3 50%,#e4e9e9)}
+.fl .fp{position:absolute;left:195px;top:3px;width:110px;height:46px;border-radius:12px;background:linear-gradient(145deg,#14868f,#0b5d63);border:2px solid #d79a2e;box-shadow:0 0 14px rgba(11,93,99,.3)}
+.fl .fp.b{top:55px}
+.fl::before,.fl::after{content:"";position:absolute;top:0;bottom:0;width:6px;background:radial-gradient(circle,#d79a2e 2.5px,transparent 3.5px) 0 0/6px 52px}
 .fl::before{left:177px}.fl::after{left:317px}
-.cl{width:500px;height:104px;transform:translate3d(-250px,-170px,4px) rotateX(-90deg);background:#f3f6f6}
+.cl{width:500px;height:104px;transform:translate3d(-250px,-170px,4px) rotateX(-90deg);background:#f6f8f8}
 .cl .lt{position:absolute;left:190px;top:12px;width:120px;height:80px;background:#fff;box-shadow:0 0 40px 22px rgba(255,232,180,.8)}
-.wl{width:104px;height:340px;background:linear-gradient(#fff 0,#f9fbfb 78%,#e2e9e9 78%,#e2e9e9 94%,#a9b8b8 94%);border-right:1px solid #dde5e5}
-.wl::before{content:"";position:absolute;left:0;right:0;top:12%;height:2px;background:rgba(11,93,99,.25)}
+.wl{width:104px;height:340px;border-right:1px solid #e3eaea;
+ background:linear-gradient(#fff 0,#fbfcfc 66%,#eef2f2 66%,#e6ecec 94%,#b9c6c6 94%,#9fb0b0 100%)}
+.wl::before{content:"";position:absolute;left:0;right:0;top:66%;height:3px;background:linear-gradient(#d79a2e,#f0c36b)}
 .wl.l{transform:translate3d(-250px,-170px,4px) rotateY(90deg)}
-.wl.r{transform:translate3d(250px,-170px,-100px) rotateY(-90deg);background:linear-gradient(#f6f9f9 0,#f1f5f5 78%,#dae2e2 78%,#dae2e2 94%,#a0b0b0 94%)}
+.wl.r{transform:translate3d(250px,-170px,-100px) rotateY(-90deg)}
 
-/* milestone tile + board on the wall */
-.ms .tl,.ms .bd{position:absolute;background:#fff;border-radius:6px}
-.ms .tl{left:-85px;top:-66px;width:170px;height:132px;padding:10px 14px;cursor:pointer;overflow:hidden;
- border:1px solid rgba(11,93,99,calc(.2 + var(--l,0)*.7));
+/* milestone: small tile + big flat board */
+.ms .tl,.ms .bd{position:absolute;background:#fff;border-radius:8px}
+.ms .tl{left:-95px;top:-72px;width:190px;height:144px;padding:12px 15px;cursor:pointer;overflow:hidden;
+ border:1px solid rgba(11,93,99,calc(.2 + var(--l,0)*.6));border-top:4px solid var(--sig);
  box-shadow:0 8px 26px rgba(11,93,99,calc(.08 + var(--l,0)*.3));
- transform:translateZ(calc(14px + var(--l,0)*12px));opacity:calc(.6 + var(--l,0)*.4)}
-.yr{display:block;font:700 2.2rem/1 Georgia,serif;color:var(--sig)}
-.kd{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);font-weight:600}
-.tl h3{font-size:.86rem;margin:.3rem 0 0}
-.bd{left:-200px;top:-140px;width:400px;height:280px;padding:16px 22px;overflow:hidden;opacity:0;pointer-events:none;
- border:1px solid #cfd9d9;box-shadow:0 24px 60px rgba(0,0,0,.28);
- transform:translateZ(14px) scale(.3) rotateX(45deg);transition:transform .5s cubic-bezier(.2,1.3,.4,1),opacity .3s}
-.ms:hover .bd,.ms.tap .bd{opacity:1;pointer-events:auto;transform:translateZ(40px) scale(1) rotateX(0)}
-.bd h3{font-size:1.15rem}.bd em{display:block;color:var(--acc);font-size:.84rem;margin-bottom:.3rem}
-.bd ul{margin:.3rem 0 0;padding-left:1.1rem;font-size:.8rem;line-height:1.4;color:#33464d}
-.bd li{margin-bottom:.25rem}
-.pq div{position:absolute;left:-70px;top:-32px;width:140px;height:64px;display:grid;place-items:center;border:2px solid var(--sig);border-radius:8px;background:#fff;
- font:700 2rem Georgia,serif;color:var(--sig);opacity:calc(.4 + var(--l,0)*.6);box-shadow:0 0 calc(var(--l,0)*40px) rgba(200,130,26,.6)}
+ transform:translateZ(calc(12px + var(--l,0)*10px));opacity:calc(.7 + var(--l,0)*.3);transition:opacity .35s}
+.yr{display:block;font:700 2.6rem/1 Georgia,serif;color:var(--sig)}
+.kd{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);font-weight:700}
+.dt{display:block;font-size:.74rem;color:var(--ink);font-weight:600;margin:.1rem 0 .15rem}
+.tl h3{font-size:.86rem;margin:.25rem 0 0}
+.bd{left:calc(var(--bw)/-2);top:calc(var(--bh)/-2);width:var(--bw);height:var(--bh);overflow:hidden;opacity:0;pointer-events:none;
+ border:1px solid #cfd9d9;border-top:6px solid var(--sig);
+ box-shadow:0 30px 70px rgba(11,93,99,.28),0 0 0 8px rgba(255,255,255,.9);
+ transform:translateZ(10px) scale(.25);transition:transform .7s cubic-bezier(.2,1.2,.3,1),opacity .4s}
+.ms:hover .bd,.ms.tap .bd,.ms.show .bd{opacity:1;pointer-events:auto;transform:translateZ(46px) scale(var(--bs))}
+.ms:hover .tl,.ms.tap .tl,.ms.show .tl{opacity:0}
+.bhd{display:flex;align-items:center;gap:14px;padding:12px 22px 8px;background:linear-gradient(#eef6f6,#fff);border-bottom:1px solid var(--line)}
+.bhd .yr{font-size:3.1rem}
+.bhd .dt{font-size:.85rem;margin:.15rem 0 0}
+.bhd .no{margin-left:auto;font:600 .75rem system-ui;color:var(--mute);letter-spacing:.1em}
+.bbd{padding:10px 22px}
+.bbd h3{font-size:1.15rem;margin:0 0 .2rem}
+.bbd em{display:block;color:var(--acc);font-size:.8rem;font-style:normal;font-weight:600;margin-bottom:.3rem}
+.bbd ul{margin:.2rem 0 0;padding-left:1.1rem;font-size:.78rem;line-height:1.42;color:#33464d}
+.bbd li{margin-bottom:.22rem}
+.pq div{position:absolute;left:-75px;top:-34px;width:150px;height:68px;display:grid;place-items:center;border:2px solid var(--sig);border-radius:10px;background:#fff;
+ font:700 2.1rem Georgia,serif;color:var(--sig);opacity:calc(.5 + var(--l,0)*.5);box-shadow:0 0 calc(var(--l,0)*44px) rgba(200,130,26,.65)}
 .pt b{position:absolute;display:block;border-radius:50%;background:radial-gradient(circle,rgba(200,130,26,.9),rgba(200,130,26,0) 70%);animation:fl 4s ease-in-out infinite}
 @keyframes fl{50%{transform:translateY(-30px)}}
 .gate div{position:absolute;left:-250px;top:-170px;width:500px;height:340px;display:grid;place-items:center;text-align:center;
  background:radial-gradient(circle,#fff 30%,#fdf1d9);font:700 2rem Georgia,serif;color:var(--sig);box-shadow:0 0 140px 80px #fff}
 
 .fog{position:fixed;inset:0;z-index:5;pointer-events:none;
- background:radial-gradient(ellipse 15% 20% at 50% 52%,rgba(255,255,255,.95) 0,rgba(255,255,255,0) 100%),radial-gradient(ellipse at 50% 50%,transparent 62%,rgba(11,93,99,.08) 100%)}
-#hud{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:.7rem 1.2rem;display:flex;align-items:center;gap:1rem;color:var(--mute);font-size:.85rem;background:linear-gradient(transparent,rgba(255,255,255,.92))}
-#hud b{font:700 1.5rem Georgia,serif;color:var(--sig);min-width:3.4ch}
+ background:radial-gradient(ellipse 14% 18% at 50% 52%,rgba(255,255,255,.95) 0,rgba(255,255,255,0) 100%),radial-gradient(ellipse at 50% 50%,transparent 62%,rgba(11,93,99,.09) 100%)}
+#hud{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:.7rem 1.2rem;display:flex;align-items:center;gap:1rem;color:var(--mute);font-size:.85rem;background:linear-gradient(transparent,rgba(255,255,255,.94) 40%)}
+#hd{display:flex;align-items:baseline;gap:.6rem;min-width:0}
+#hy{font:700 2rem Georgia,serif;color:var(--sig);min-width:3.6ch}
+#hl{max-width:30ch;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink);font-weight:600}
 #bar{flex:1;height:3px;background:#dbe3e2;border-radius:3px;overflow:hidden}#bar i{display:block;height:100%;width:0;background:var(--sig)}
 #mm{width:120px;height:56px}
-.b2{color:var(--acc);background:#fff;border:1.5px solid var(--acc);border-radius:8px;padding:.3rem .7rem;font:inherit;font-size:.82rem;font-weight:600;cursor:pointer}
+.b2{color:var(--acc);background:#fff;border:1.5px solid var(--acc);border-radius:8px;padding:.3rem .7rem;font:inherit;font-size:.82rem;font-weight:600;cursor:pointer;white-space:nowrap}
 .b2.on{background:var(--acc);color:#fff}
-#hint{position:fixed;left:50%;bottom:4.6rem;transform:translateX(-50%);z-index:20;color:var(--acc);font-weight:600;letter-spacing:.08em;animation:bob 1.6s ease-in-out infinite;transition:opacity .5s}
+#hint{position:fixed;left:50%;bottom:5rem;transform:translateX(-50%);z-index:20;color:var(--acc);font-weight:600;letter-spacing:.06em;text-align:center;animation:bob 1.6s ease-in-out infinite;transition:opacity .6s}
 @keyframes bob{50%{transform:translate(-50%,8px)}}
 
 /* full CV */
@@ -86,7 +99,7 @@ nav a.glow-button{color:#F7F8F5;background:rgba(22,125,141,.18);border-color:rgb
 .chips{display:flex;flex-wrap:wrap;gap:.35rem;padding:0;list-style:none}
 .chips li{background:var(--tint);color:var(--acc);padding:.2rem .65rem;border-radius:99px;font-size:.82rem}
 footer{padding:1rem 0 2rem;color:var(--mute);font-size:.85rem}
-@media(max-width:640px){.entry{grid-template-columns:1fr}#mm{display:none}}
+@media(max-width:640px){.entry{grid-template-columns:1fr}#mm,#hl{display:none}}
 @media print{header,#stage,#hud,#hint,.fog,.tools{display:none!important}#cv{position:static;clip-path:none;visibility:visible;padding:0}.entry{break-inside:avoid}}
 </style>
 </head>
@@ -103,11 +116,14 @@ footer{padding:1rem 0 2rem;color:var(--mute);font-size:.85rem}
 <div id="space"></div>
 <div id="stage"><div id="world"></div></div>
 <div class="fog"></div>
-<div id="hint">Scroll to walk ↓ · hover a tile</div>
-<div id="hud"><b id="hy">2011</b><div id="bar"><i></i></div>
+<div id="hint">Walking the corridor…<br>scroll anytime to take control</div>
+<div id="hud">
+  <div id="hd"><b id="hy">2011</b><span id="hl">Start</span></div>
+  <div id="bar"><i></i></div>
   <svg id="mm" viewBox="0 0 120 56" aria-hidden="true"></svg>
   <button class="b2" id="auto" type="button">▶ Auto-walk</button>
-  <button class="b2" id="skip" type="button">Skip to CV</button></div>
+  <button class="b2" id="skip" type="button">Skip to CV</button>
+</div>
 
 <main id="cv" aria-label="Full curriculum vitae"><div class="wrap2">
   <h1>Curriculum vitae</h1>
@@ -122,7 +138,6 @@ footer{padding:1rem 0 2rem;color:var(--mute);font-size:.85rem}
 </div></main>
 
 <script>
-/* visible error box, so a failure is never a silent blank page */
 addEventListener("error",e=>{const d=document.createElement("div");
  d.style.cssText="position:fixed;top:70px;left:10px;right:10px;z-index:99;background:#fee;color:#900;padding:10px;border:1px solid #900;font:13px monospace";
  d.textContent="Script error: "+e.message+" (line "+e.lineno+")";document.body.appendChild(d)});
@@ -215,41 +230,51 @@ const $=s=>document.querySelector(s);
 const yr=s=>(String(s).match(/\d{4}/)||[""])[0];
 const clip=(t,n)=>t.length>n?t.slice(0,n-1)+"…":t;
 const strip=h=>h.replace(/<[^>]+>/g,"");
+const sm=t=>t*t*(3-2*t),cl=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
 
 /* 1. milestones, oldest first */
 const M=[];
 D.education.slice().reverse().forEach(e=>M.push({y:yr(e[0]),k:"Education",t:e[1],s:e[2],w:e[0],d:[]}));
 D.jobs.slice().reverse().forEach(j=>M.push({y:yr(j.y),k:"Role",t:j.t,s:j.o,w:j.y,d:j.b.slice(0,3)}));
 D.awards.slice().reverse().forEach(a=>M.push({y:yr(a[0]),k:"Award",t:a[1],s:a[2],w:a[0],d:[]}));
-D.pubs.filter(p=>p[0]==="original").forEach(p=>{const c=strip(p[1]),parts=c.split(". ");
-  M.push({y:(c.match(/\b(20\d\d)\b/)||["",""])[1],k:"Publication",t:parts[1]||c,s:parts[2]||"",d:[c]})});
+D.pubs.filter(p=>p[0]==="original").forEach(p=>{const c=strip(p[1]),q=c.split(". ");
+  M.push({y:(c.match(/\b(20\d\d)\b/)||["",""])[1],k:"Publication",t:q[1]||c,s:q[2]||"",w:"",d:["Authors: "+q[0]]})});
 M.sort((a,b)=>a.y-b.y);
+M.forEach((m,i)=>m.side=i%2?1:-1);   // -1 left wall, +1 right wall
 
-/* 2. curved path: heading = A·sin(s/R) */
-const A=.6,R=1500,ST=20,S=100,GAP=480,START=700,n=M.length,L=START+n*GAP+700,MAXD=L-420;
+/* 2. curved path */
+const A=.6,R=1400,ST=20,S=100,GAP=560,START=700,n=M.length,L=START+n*GAP+700,MAXD=L-420;
 const hd=s=>A*Math.sin(s/R);
 const PX=[0],PZ=[0];
 for(let i=1;i<=L/ST+80;i++){const h=hd((i-.5)*ST);PX[i]=PX[i-1]+Math.sin(h)*ST;PZ[i]=PZ[i-1]-Math.cos(h)*ST}
 const at=s=>{const f=Math.max(0,s)/ST,i=Math.floor(f),t=f-i;return[PX[i]+(PX[i+1]-PX[i])*t,PZ[i]+(PZ[i+1]-PZ[i])*t,hd(s)]};
 
-/* 3. build the world */
-const world=$("#world"),objs=[],lit=[];
-const mk=(cls,tf,html,s,isLit)=>{const e=document.createElement("div");e.className="o "+cls;e.style.transform=tf;e.innerHTML=html||"";
-  world.appendChild(e);const o={e,s,v:true};objs.push(o);if(isLit)lit.push(o);return o};
+/* 3. scroll position <-> distance, with a slow "stop" zone at every milestone */
+const PD=440,AW=45,RO=360,RI=160,KS=185,DIST=247+KS-46;
+const SS=M.map((_,i)=>START+i*GAP);
+const posOf=s=>{let p=s;for(let i=0;i<n;i++)p+=PD*sm(cl((s-SS[i]+AW)/(2*AW)));return p};
+const TS=4,T=[];for(let s=0;s<=L+TS;s+=TS)T.push(posOf(s));
+const sOf=p=>{if(p<=0)return 0;let lo=0,hi=T.length-1;while(hi-lo>1){const m=(lo+hi)>>1;if(T[m]<=p)lo=m;else hi=m}return(lo+(p-T[lo])/((T[hi]-T[lo])||1))*TS};
+const C=SS.map(posOf),POSMAX=posOf(MAXD);
+
+/* 4. build the world */
+const world=$("#world"),objs=[],msE=[],pqE=[];
+const mk=(cls,tf,html,s)=>{const e=document.createElement("div");e.className="o "+cls;e.style.transform=tf;e.innerHTML=html||"";
+  world.appendChild(e);objs.push({e,s,v:true});return e};
 for(let i=0;i<=L/S;i++){
   const [x,z]=at(i*S),h=hd(i*S+S/2);
   mk("g",`translate3d(${x}px,0,${z}px) rotateY(${-h}rad)`,
-   `<i class="fl">${i%2?"":'<b class="fp"></b>'}</i><i class="cl">${i%2?"":'<b class="lt"></b>'}</i><i class="wl l"></i><i class="wl r"></i>`,i*S+50);
+   `<i class="fl"><b class="fp"></b><b class="fp b"></b></i><i class="cl">${i%2?"":'<b class="lt"></b>'}</i><i class="wl l"></i><i class="wl r"></i>`,i*S+50);
 }
-/* stepping stones: draw on every segment so the path is continuous */
-document.querySelectorAll(".fl").forEach(f=>{if(!f.querySelector(".fp"))f.insertAdjacentHTML("afterbegin",'<b class="fp"></b>')});
 M.forEach((m,i)=>{
-  const s=START+i*GAP,side=i%2?1:-1,[x,z,h]=at(s);
-  const lines=m.d.map(t=>`<li>${clip(t,m.k==="Publication"?260:150)}</li>`).join("");
-  mk("ms",`translate3d(${x}px,0,${z}px) rotateY(${-h}rad) translate3d(${side*247}px,0,0) rotateY(${-side*90}deg)`,
-   `<div class="tl"><span class="yr">${m.y}</span><span class="kd">${m.k}</span><h3>${clip(m.t,40)}</h3></div>
-    <div class="bd"><span class="kd">${m.k} · ${m.w||m.y}</span><h3>${m.t}</h3>${m.s?`<em>${m.s}</em>`:""}<ul>${lines}</ul></div>`,s,true);
-  mk("pq",`translate3d(${x}px,165px,${z}px) rotateY(${-h}rad) rotateX(90deg)`,`<div>${m.y}</div>`,s,true);
+  const s=SS[i],side=m.side,[x,z,h]=at(s);
+  const lines=m.d.map(t=>`<li>${clip(t,m.k==="Role"?125:160)}</li>`).join("");
+  const showdt=m.w&&m.w!==m.y;
+  msE.push(mk("ms",`translate3d(${x}px,0,${z}px) rotateY(${-h}rad) translate3d(${side*247}px,0,0) rotateY(${-side*90}deg)`,
+   `<div class="tl"><span class="yr">${m.y}</span>${showdt?`<span class="dt">${m.w}</span>`:""}<span class="kd">${m.k}</span><h3>${clip(m.t,38)}</h3></div>
+    <div class="bd"><div class="bhd"><span class="yr">${m.y}</span><div><span class="kd">${m.k}</span>${showdt?`<span class="dt">${m.w}</span>`:""}</div><span class="no">${String(i+1).padStart(2,"0")} / ${n}</span></div>
+    <div class="bbd"><h3>${m.t}</h3>${m.s?`<em>${m.s}</em>`:""}<ul>${lines}</ul></div></div>`,s));
+  pqE.push(mk("pq",`translate3d(${x}px,165px,${z}px) rotateY(${-h}rad) rotateX(90deg)`,`<div>${m.y}</div>`,s));
 });
 for(let i=0;i<36;i++){
   const s=Math.random()*(MAXD+800),[x,z,h]=at(s),sz=6+Math.random()*9;
@@ -265,34 +290,55 @@ const sx=v=>6+(v-x0)/(x1-x0||1)*108,sy=v=>6+(v-y0)/(y1-y0||1)*44;
 $("#mm").innerHTML=`<polyline points="${pts.map(p=>sx(p[0]).toFixed(1)+","+sy(p[1]).toFixed(1)).join(" ")}" fill="none" stroke="#0b5d63" stroke-width="2" stroke-linecap="round"/><circle id="dot" r="4" fill="#c8821a"/>`;
 const dot=$("#dot");
 
-/* 4. scroll-driven walking */
-const space=$("#space"),cv=$("#cv"),hint=$("#hint"),hy=$("#hy"),bar=$("#bar i"),stage=$("#stage");
+/* 5. camera, auto-walk, turning */
+const space=$("#space"),cv=$("#cv"),hint=$("#hint"),hy=$("#hy"),hl=$("#hl"),bar=$("#bar i"),stage=$("#stage"),btn=$("#auto");
 const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
-let cur=0,tgt=0,prog=0,open=false,auto=false;
-const size=()=>{space.style.height=(n*60+120)+"vh";stage.style.perspective=Math.max(650,Math.min(1000,innerWidth*.8))+"px"};
-const setOpen=v=>{open=v;cv.classList.toggle("open",v);if(v){auto=false;$("#auto").classList.remove("on");$("#auto").textContent="▶ Auto-walk";cv.scrollTop=0}};
-function onScroll(){
-  const max=document.documentElement.scrollHeight-innerHeight;
-  prog=max>0?Math.min(1,Math.max(0,scrollY/max)):0;tgt=prog*MAXD;
-  hint.style.opacity=prog>.02?0:1;
-  if(!open&&prog>.985)setOpen(true);else if(open&&prog<.96)setOpen(false);
+let cur=0,open=false,auto=false,posA=0,lastSet=0,last=0,wNow=0,P=800,shown=[],lastNear=-1;
+function size(){
+  space.style.height=(POSMAX+innerHeight)+"px";
+  P=Math.max(650,Math.min(1000,innerWidth*.8));stage.style.perspective=P+"px";
+  const nar=innerWidth<700,bw=nar?320:460,bh=nar?460:330;
+  const k=Math.min(Math.min(innerWidth*.88,900)/bw,innerHeight*.72/bh);
+  const rs=document.documentElement.style;
+  rs.setProperty("--bw",bw+"px");rs.setProperty("--bh",bh+"px");rs.setProperty("--bs",(k*DIST/P).toFixed(4));
 }
-function frame(){
-  if(auto&&!open)scrollBy(0,3);
-  cur+=reduce?tgt-cur:(tgt-cur)*.07;
-  const [x,z]=at(cur),h=hd(cur+140),dh=A/R*Math.cos(cur/R);
-  const bob=reduce?0:Math.sin(cur*.03)*3,roll=reduce?0:-dh*2600;
-  world.style.transform=`rotateZ(${roll}deg) rotateY(${h}rad) translate3d(${-x}px,${bob}px,${-z}px)`;
-  objs.forEach(o=>{const v=o.s>cur-600&&o.s<cur+3100;if(v!==o.v){o.v=v;o.e.style.display=v?"":"none"}});
-  let best=0,by=hy.textContent;
-  lit.forEach((o,k)=>{const d=o.s-cur+150;let l=d>=0?1-Math.min(d/900,1):1-Math.min(-d/350,1);l=l*l*(3-2*l);
-    o.e.style.setProperty("--l",l.toFixed(3));if(l>best&&(k%2===0)){best=l;by=M[k>>1].y}});
-  hy.textContent=by;bar.style.width=prog*100+"%";
-  const p=at(cur);dot.setAttribute("cx",sx(-p[1]).toFixed(1));dot.setAttribute("cy",sy(p[0]).toFixed(1));
+function setAuto(v){auto=v;btn.classList.toggle("on",v);btn.textContent=v?"❚❚ Pause":"▶ Auto-walk";if(v){posA=scrollY;lastSet=scrollY}}
+function setOpen(v){open=v;cv.classList.toggle("open",v);if(v){setAuto(false);cv.scrollTop=0}}
+function onScroll(){if(auto&&Math.abs(scrollY-lastSet)>4)setAuto(false)}
+
+function frame(t){
+  const dt=Math.min(.05,(t-last)/1000||0);last=t;
+  if(auto&&!open){posA=Math.min(POSMAX,posA+360*(1-.8*wNow)*dt);lastSet=posA;scrollTo(0,posA)}
+  const tgt=auto?posA:scrollY,prog=tgt/POSMAX;
+  hint.style.opacity=tgt>60?0:1;
+  if(!open&&prog>.985)setOpen(true);else if(open&&prog<.96)setOpen(false);
+  cur+=reduce?tgt-cur:(tgt-cur)*Math.min(1,dt*5);
+  const sc=sOf(cur);
+
+  let wBest=0,iBest=0,near=0,nd=1e9;
+  M.forEach((m,i)=>{
+    const dp=cur-C[i],ad=Math.abs(dp);
+    const w=sm(cl((RO-ad)/(RO-RI)));
+    if(w>wBest){wBest=w;iBest=i}
+    if(ad<nd){nd=ad;near=i}
+    const l=dp<0?sm(cl(1+dp/1400)):sm(cl(1-dp/520));
+    if(l>0||msE[i]._l){const v=l.toFixed(3);msE[i].style.setProperty("--l",v);pqE[i].style.setProperty("--l",v);msE[i]._l=l>0}
+    const sh=w>.82;if(sh!==!!shown[i]){shown[i]=sh;msE[i].classList.toggle("show",sh)}
+  });
+  wNow=wBest;
+  const side=M[iBest].side,w=wBest,[x,z]=at(sc);
+  const hb=hd(sc+140*(1-w)),yaw=side*w*Math.PI/2,strafe=side*KS*w;
+  const bob=reduce?0:Math.sin(cur*.03)*3*(1-w),roll=reduce?0:-(A/R*Math.cos(sc/R))*2600*(1-w);
+  world.style.transform=`rotateZ(${roll}deg) rotateY(${yaw}rad) translate3d(${strafe}px,${bob}px,0) rotateY(${hb}rad) translate3d(${-x}px,0,${-z}px)`;
+
+  objs.forEach(o=>{const v=o.s>sc-700&&o.s<sc+3100;if(v!==o.v){o.v=v;o.e.style.display=v?"":"none"}});
+  if(near!==lastNear){lastNear=near;hy.textContent=M[near].y;hl.textContent=M[near].k+" · "+clip(M[near].t,34)}
+  bar.style.width=cl(prog)*100+"%";
+  dot.setAttribute("cx",sx(-at(sc)[1]).toFixed(1));dot.setAttribute("cy",sy(at(sc)[0]).toFixed(1));
   requestAnimationFrame(frame);
 }
 
-/* 5. full CV */
+/* 6. full CV */
 const rows=a=>a.map(x=>`<div class="entry"><div class="when">${x[0]}</div><div><h3>${x[1]}</h3>${x[2]?`<span class="org">${x[2]}</span>`:""}</div></div>`).join("");
 const TAGS={original:"Original research",gbd:"GBD collaboration",review:"In review or in preparation"};
 const SEC=[["Education",()=>rows(D.education)],
@@ -303,17 +349,21 @@ const SEC=[["Education",()=>rows(D.education)],
 ["Skills",()=>`<ul class="chips">${D.skills.map(s=>`<li>${s}</li>`).join("")}</ul>`]];
 $("#content").innerHTML=SEC.map(s=>`<section class="sec"><h2>${s[0]}</h2>${s[1]()}</section>`).join("");
 
-/* 6. wiring */
-const goEnd=()=>scrollTo({top:document.documentElement.scrollHeight,behavior:"smooth"});
-const goBack=()=>scrollTo({top:(document.documentElement.scrollHeight-innerHeight)*.9,behavior:"smooth"});
+/* 7. wiring */
+const goEnd=()=>{setAuto(false);scrollTo({top:POSMAX,behavior:"smooth"})};
+const goBack=()=>scrollTo({top:POSMAX*.9,behavior:"smooth"});
 addEventListener("scroll",onScroll,{passive:true});
-addEventListener("resize",()=>{size();onScroll()});
+addEventListener("resize",size);
 $("#skip").onclick=goEnd;$("#back").onclick=goBack;$("#prt").onclick=()=>print();
-$("#auto").onclick=e=>{auto=!auto;e.target.classList.toggle("on",auto);e.target.textContent=auto?"❚❚ Pause":"▶ Auto-walk"};
+btn.onclick=()=>{if(!open)setAuto(!auto)};
 cv.addEventListener("wheel",e=>{if(e.deltaY<0&&cv.scrollTop<=0)goBack()},{passive:true});
-addEventListener("keydown",e=>{if(e.key==="Escape"&&open)goBack()});
+addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&open)goBack();
+  if(e.key===" "&&!open){e.preventDefault();setAuto(!auto)}
+});
 stage.addEventListener("click",e=>{const m=e.target.closest(".ms");document.querySelectorAll(".ms.tap").forEach(x=>{if(x!==m)x.classList.remove("tap")});if(m)m.classList.toggle("tap")});
-size();onScroll();requestAnimationFrame(frame);
+size();requestAnimationFrame(frame);
+if(!reduce)setTimeout(()=>{if(scrollY<5&&!open)setAuto(true)},900);
 </script>
 </body>
 </html>
