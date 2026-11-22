@@ -5,95 +5,489 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CV | Prabin Karki</title>
 <style>
-:root{--ink:#12262e;--mute:#566a72;--line:#dbe3e2;--acc:#0b5d63;--tint:#e3eeee;--sig:#c8821a}
+:root{--ink:#12262e;--mute:#566a72;--line:#dbe3e2;--acc:#0b5d63;--tint:#e3eeee;--sig:#c8821a;--bw:460px;--bh:330px;--bs:1}
 *{box-sizing:border-box}
-body{margin:0;background:#fff;color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.2;margin:0}
+html,body{margin:0}
+body{background:#fff;color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.15;margin:0 0 .3em}
 a{color:var(--acc)}
-header{background:#081116;color:#f7f8f5}
-header .bar{max-width:960px;margin:auto;padding:.8rem 1.1rem;display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center;justify-content:space-between}
+a:focus-visible,button:focus-visible{outline:3px solid var(--sig);outline-offset:2px}
+
+header{position:fixed;top:0;left:0;right:0;z-index:40;background:rgba(8,17,22,.92)}
+header .wrap{max-width:1040px;margin:auto;padding:.55rem 1.1rem;display:flex;justify-content:space-between;align-items:center;gap:.8rem;flex-wrap:wrap;min-height:58px}
 .brand{font:700 1.15rem Georgia,serif;color:#f7f8f5;text-decoration:none}
-nav{display:flex;flex-wrap:wrap;gap:.3rem}
-nav a{padding:.3rem .65rem;border:1px solid transparent;border-radius:8px;color:#b8c8cb;font-size:.9rem;text-decoration:none}
-nav a:hover,nav a[aria-current]{color:#f7f8f5;border-color:rgba(22,125,141,.6)}
-main{max-width:960px;margin:auto;padding:2rem 1.1rem 3rem}
-h1{font-size:2.3rem}
-.meta{display:flex;flex-wrap:wrap;gap:.2rem 1.2rem;margin:.5rem 0 0;padding:0;list-style:none;color:var(--mute);font-size:.95rem}
-.tools{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0 1.6rem}
-.btn{display:inline-block;padding:.45rem .9rem;border:1.5px solid var(--acc);border-radius:8px;background:none;color:var(--acc);font:600 .92rem system-ui,sans-serif;text-decoration:none;cursor:pointer}
+nav{display:flex;gap:.35rem;flex-wrap:wrap;margin-left:auto}
+nav a{padding:.35rem .65rem;border:1px solid transparent;border-radius:8px;color:#b8c8cb;font-size:.87rem;text-decoration:none}
+nav a:hover,nav a[aria-current]{color:#f7f8f5;background:rgba(22,125,141,.18);border-color:rgba(22,125,141,.5)}
+
+/* ---------- plain fallback: the CV is simply a page ---------- */
+#stage,.fog,#hud,#hint,#cont,#back{display:none}
+#cv{background:#f5f7f6;padding-top:80px;min-height:100vh}
+.wrap2{max-width:960px;margin:auto;padding:0 1.1rem}
+
+/* ---------- 3D mode ---------- */
+.js #space{width:1px}
+.js #stage{display:block;position:fixed;inset:0;overflow:hidden;perspective:900px;perspective-origin:50% 52%;background:#fff}
+.js .fog{display:block}
+.js #hud{display:flex}
+.js #hint{display:block}
+.js #back{display:inline-block}
+.js body.reading #cont{display:block}
+.js #cv{position:fixed;inset:0;z-index:30;overflow:auto;overscroll-behavior:contain;min-height:0;
+ clip-path:inset(0 0 100% 0);visibility:hidden;transition:clip-path 1.3s cubic-bezier(.65,0,.25,1),visibility 0s 1.3s}
+.js #cv.open{clip-path:inset(0);visibility:visible;transition:clip-path 1.3s cubic-bezier(.65,0,.25,1)}
+
+#world{position:absolute;left:50%;top:52%;width:0;height:0;transform-style:preserve-3d;will-change:transform}
+#world>*{position:absolute;left:0;top:0;transform-style:preserve-3d}
+.g i{position:absolute;left:0;top:0;display:block;transform-origin:0 0}
+
+/* white corridor: floor, ceiling, two walls per 400px section */
+.fl{width:500px;height:402px;transform:translate3d(-250px,170px,0) rotateX(-90deg);
+ background:repeating-linear-gradient(0deg,rgba(0,0,0,.06) 0 1px,transparent 1px 100px),repeating-linear-gradient(90deg,#eef2f2 0 124px,#dfe6e6 124px 125px)}
+.fl .rn{position:absolute;left:190px;top:0;bottom:0;width:120px;background:linear-gradient(90deg,#d79a2e 0 3px,#0f7079 3px calc(100% - 3px),#d79a2e calc(100% - 3px))}
+.cl{width:500px;height:402px;transform:translate3d(-250px,-170px,0) rotateX(-90deg);background:#f8fafa}
+.cl .lt{position:absolute;left:190px;width:120px;height:80px;background:#fff;box-shadow:0 0 40px 22px rgba(255,238,200,.85)}
+.wl{width:402px;height:340px;
+ background:repeating-linear-gradient(90deg,transparent 0 199px,rgba(0,0,0,.05) 199px 201px),
+ linear-gradient(#e6ebeb 0,#fff 14%,#fff 66%,#eef2f2 66%,#e8eeee 92%,#b9c6c6 92%,#9fb0b0 100%)}
+.wl::before{content:"";position:absolute;left:0;right:0;top:66%;height:3px;background:linear-gradient(#d79a2e,#f0c36b)}
+.wl.l{transform:translate3d(-250px,-170px,0) rotateY(90deg)}
+.wl.r{transform:translate3d(250px,-170px,0) rotateY(90deg)}
+
+/* entry: arch, double doors, welcome rug */
+.arch{position:absolute;left:-250px;top:-170px;width:500px;height:70px;display:grid;place-items:center;align-content:center;text-align:center;
+ background:linear-gradient(#fff,#f1f5f5);border-bottom:5px solid #d79a2e;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.arch small{font:600 .75rem system-ui;color:var(--acc)}
+.arch b{font:700 1.7rem Georgia,serif;line-height:1.1}
+.dlf{position:absolute;top:-100px;width:247px;height:270px;background:linear-gradient(90deg,#fff,#eef3f3);
+ box-shadow:inset 0 0 0 12px #f7f9f9,inset 0 0 0 15px #d79a2e,inset 0 0 0 38px #fff,inset 0 0 0 40px #cdd8d8,0 0 30px rgba(0,0,0,.12)}
+.dlf.L{left:-247px;transform-origin:0 0}
+.dlf.R{left:0;transform-origin:100% 0}
+.dlf::after{content:"";position:absolute;top:130px;width:10px;height:44px;border-radius:5px;background:linear-gradient(#f0c36b,#a8731a)}
+.dlf.L::after{right:22px}.dlf.R::after{left:22px}
+.rug div{position:absolute;left:-130px;top:-62px;width:260px;height:124px;display:grid;place-items:center;text-align:center;border-radius:12px;
+ background:linear-gradient(#0f7079,#0b5d63);color:#fff;font:700 1.7rem Georgia,serif;line-height:1.2;
+ box-shadow:inset 0 0 0 6px #0b5d63,inset 0 0 0 8px #f0c36b,0 0 30px rgba(11,93,99,.35)}
+.rug small{display:block;font:600 .85rem system-ui;color:#f0c36b}
+
+/* milestones: a small tile on the wall that opens into a large board */
+.ms .tl,.ms .bd{position:absolute;background:#fff;border-radius:8px}
+.ms .sp{position:absolute;left:-260px;top:-170px;width:520px;height:340px;pointer-events:none;transform:translateZ(1px);
+ background:radial-gradient(ellipse at 50% 50%,rgba(255,226,160,.85),rgba(255,226,160,0) 68%);opacity:calc(var(--l,0)*.85)}
+.ms .tl{left:-95px;top:-75px;width:190px;height:150px;padding:12px 15px;cursor:pointer;overflow:hidden;
+ border:1px solid rgba(11,93,99,calc(.2 + var(--l,0)*.6));border-top:4px solid var(--sig);
+ box-shadow:0 8px 26px rgba(11,93,99,calc(.08 + var(--l,0)*.3));
+ transform:translateZ(calc(12px + var(--l,0)*10px));opacity:calc(.72 + var(--l,0)*.28)}
+.ms .tl:hover{box-shadow:0 0 0 3px rgba(200,130,26,.55),0 14px 34px rgba(200,130,26,.4)}
+.ms.show .tl{opacity:0}
+.yr{display:block;font:700 2.6rem/1 Georgia,serif;color:var(--sig)}
+.kd{font-size:.72rem;color:var(--acc);font-weight:700}
+.dt{display:block;font-size:.74rem;font-weight:600;margin:.1rem 0 .15rem}
+.tl h3{font-size:.86rem;margin:.25rem 0 0}
+.tl .rd{position:absolute;right:12px;bottom:7px;font:700 .68rem system-ui;color:var(--sig)}
+.bd{left:calc(var(--bw)/-2);top:calc(var(--bh)/-2);width:var(--bw);height:var(--bh);overflow:hidden;opacity:0;pointer-events:none;
+ border:1px solid #cfd9d9;border-top:6px solid var(--sig);
+ box-shadow:0 30px 70px rgba(11,93,99,.28),0 0 0 8px rgba(255,255,255,.9);
+ transform:translateZ(10px) scale(.25);transition:transform .8s cubic-bezier(.2,1.1,.3,1),opacity .45s}
+.ms.show .bd{opacity:1;pointer-events:auto;transform:translateZ(46px) scale(var(--bs))}
+.bhd{display:flex;align-items:center;gap:14px;padding:12px 22px 8px;background:linear-gradient(#eef6f6,#fff);border-bottom:1px solid var(--line)}
+.bhd .yr{font-size:3.1rem}
+.bhd .dt{font-size:.85rem}
+.bhd .no{margin-left:auto;font:600 .75rem system-ui;color:var(--mute)}
+.bbd{padding:10px 22px}
+.bbd h3{font-size:1.15rem;margin:0 0 .2rem}
+.bbd em{display:block;color:var(--acc);font-size:.8rem;font-style:normal;font-weight:600;margin-bottom:.3rem}
+.bbd ul{margin:.2rem 0 0;padding-left:1.1rem;font-size:.78rem;line-height:1.42;color:#33464d}
+.bbd li{margin-bottom:.22rem}
+.pq div{position:absolute;left:-75px;top:-34px;width:150px;height:68px;display:grid;place-items:center;border:2px solid var(--sig);border-radius:10px;background:#fff;
+ font:700 2.1rem Georgia,serif;color:var(--sig);opacity:calc(.5 + var(--l,0)*.5);box-shadow:0 0 calc(var(--l,0)*44px) rgba(200,130,26,.65)}
+.pt b{position:absolute;display:block;border-radius:50%;background:radial-gradient(circle,rgba(200,130,26,.9),rgba(200,130,26,0) 70%);animation:float 4s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-30px)}}
+.gate div{position:absolute;left:-250px;top:-170px;width:500px;height:340px;display:grid;place-items:center;text-align:center;
+ background:radial-gradient(circle,#fff 30%,#fdf1d9);font:700 2rem Georgia,serif;color:var(--sig)}
+
+.fog{position:fixed;inset:0;z-index:5;pointer-events:none;transition:opacity .5s;
+ background:radial-gradient(ellipse 14% 18% at 50% 52%,rgba(255,255,255,.95) 0,rgba(255,255,255,0) 100%),radial-gradient(ellipse at 50% 50%,transparent 62%,rgba(11,93,99,.09) 100%)}
+body.reading .fog{opacity:0}
+#hud{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:.7rem 1.2rem;align-items:center;gap:1rem;color:var(--mute);font-size:.85rem;
+ background:linear-gradient(transparent,rgba(255,255,255,.94) 40%);pointer-events:none}
+#hud .b2{pointer-events:auto}
+#hd{display:flex;align-items:baseline;gap:.6rem;min-width:0}
+#hy{font:700 2rem Georgia,serif;color:var(--sig);min-width:3.6ch}
+#hl{max-width:30ch;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink);font-weight:600}
+#bar{flex:1;height:3px;background:#dbe3e2;border-radius:3px;overflow:hidden}
+#bar i{display:block;height:100%;width:0;background:var(--sig)}
+.b2{color:var(--acc);background:#fff;border:1.5px solid var(--acc);border-radius:8px;padding:.3rem .7rem;font:inherit;font-size:.82rem;font-weight:600;cursor:pointer;white-space:nowrap}
+.b2.on{background:var(--acc);color:#fff}
+#cont{position:fixed;left:50%;bottom:4.8rem;transform:translateX(-50%);z-index:25;padding:.5rem 1.1rem;font-size:.92rem;box-shadow:0 6px 20px rgba(11,93,99,.25)}
+#hint{position:fixed;left:50%;bottom:5rem;transform:translateX(-50%);z-index:20;color:var(--acc);font-weight:600;text-align:center;animation:bob 1.6s ease-in-out infinite;transition:opacity .6s;pointer-events:none}
+@keyframes bob{50%{transform:translate(-50%,8px)}}
+
+/* ---------- full CV ---------- */
+.meta{display:flex;flex-wrap:wrap;gap:.25rem 1rem;color:var(--mute);margin:.4rem 0;padding:0;list-style:none;font-size:.9rem}
+.tools{display:flex;flex-wrap:wrap;gap:.5rem;margin:.9rem 0 1.2rem}
+.btn{display:inline-block;padding:.45rem .85rem;border-radius:8px;border:1.5px solid var(--acc);color:var(--acc);text-decoration:none;font:inherit;font-size:.9rem;font-weight:600;cursor:pointer;background:none}
 .btn.pri{background:var(--acc);color:#fff}
-section{margin:0 0 2rem}
-h2{display:inline-block;margin-bottom:.6rem;padding-bottom:.2rem;border-bottom:2px solid var(--sig);font-size:1.4rem}
-.profile{max-width:72ch;font-family:Georgia,serif;font-size:1.05rem}
-.entry{display:grid;grid-template-columns:150px 1fr;gap:.2rem 1rem;padding:.6rem 0;border-bottom:1px solid var(--line)}
-.when{color:var(--mute);font-size:.88rem}
-.entry h3{font-size:1.05rem}
-.org{display:block;color:var(--acc);font-size:.93rem}
-.entry ul{margin:.4rem 0 0;padding-left:1.2rem;font-size:.94rem}
-.entry li{margin-bottom:.25rem}
-.pubgroup{margin:1rem 0 .3rem;font:600 .95rem system-ui,sans-serif;color:var(--acc)}
-ol.pubs{margin:0;padding-left:1.4rem;max-width:80ch}
-ol.pubs li{margin-bottom:.7rem;font-size:.95rem}
-.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:0;padding:0;list-style:none}
-.chips li{padding:.2rem .7rem;border-radius:99px;background:var(--tint);color:var(--acc);font-size:.88rem}
-footer{max-width:960px;margin:auto;padding:0 1.1rem 2rem;color:var(--mute);font-size:.88rem}
-@media(max-width:640px){.entry{grid-template-columns:1fr}h1{font-size:1.9rem}}
-@media print{header,.tools{display:none}main{padding:0}body{font-size:11pt}.entry{break-inside:avoid}a{color:inherit;text-decoration:none}}
+.sec{margin:0 0 1.2rem}
+.sec h2{font-size:1.35rem;padding-bottom:.2rem;border-bottom:2px solid var(--sig);display:inline-block}
+.profile{max-width:72ch;font-family:Georgia,serif;font-size:1.02rem}
+.entry{display:grid;grid-template-columns:150px 1fr;gap:.15rem .8rem;padding:.4rem 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.when{color:var(--mute);font-size:.85rem}
+.org{display:block;color:var(--acc);font-size:.89rem}
+.entry h3{font-size:1rem;margin:0}
+.entry ul{margin:.3rem 0;padding-left:1.1rem;font-size:.9rem}
+.pubgroup{margin:.9rem 0 .3rem;font:600 .93rem system-ui;color:var(--acc)}
+ol.pubs{margin:0;padding-left:1.4rem;max-width:82ch;font-size:.92rem}
+ol.pubs li{margin-bottom:.6rem}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem;padding:0;list-style:none}
+.chips li{background:var(--tint);color:var(--acc);padding:.2rem .65rem;border-radius:99px;font-size:.82rem}
+footer{padding:1rem 0 2rem;color:var(--mute);font-size:.85rem}
+#err{position:fixed;top:70px;left:10px;right:10px;z-index:99;background:#fee;color:#900;padding:10px;border:1px solid #900;font:13px monospace}
+
+@media(max-width:640px){.entry{grid-template-columns:1fr}#hl{display:none}}
+@media print{header,#stage,#hud,#hint,#cont,.fog,.tools{display:none!important}.js #cv{position:static;clip-path:none;visibility:visible;padding:0}.entry{break-inside:avoid}}
+@media(prefers-reduced-motion:reduce){.bd,.js #cv{transition:none}.pt b,#hint{animation:none}}
 </style>
 </head>
 <body>
-<header>
-  <div class="bar">
-    <a class="brand" href="index.html#top">Prabin Karki</a>
-    <nav aria-label="Main navigation">
-      <a href="index.html#about">About</a>
-      <a href="index.html#portfolio">Portfolio</a>
-      <a href="cv.html" aria-current="page">CV</a>
-      <a href="resources.html">Resources</a>
-      <a href="index.html#contact">Contact</a>
-      <a href="work_with_me.html">Work with me</a>
-    </nav>
-  </div>
-</header>
+<header><div class="wrap">
+  <a class="brand" href="index.html#top">Prabin Karki</a>
+  <nav aria-label="Main navigation">
+    <a href="index.html#about">About</a><a href="index.html#portfolio">Portfolio</a>
+    <a href="cv.html" aria-current="page">CV</a><a href="resources.html">Resources</a>
+    <a href="index.html#contact">Contact</a><a href="work_with_me.html">Work with me</a>
+  </nav>
+</div></header>
 
-<main>
+<div id="space"></div>
+<div id="stage"><div id="world"></div></div>
+<div class="fog"></div>
+<div id="hint">Scroll to walk the hall<br>Hover a year to turn and read it</div>
+<button class="b2" id="cont" type="button">Continue walking</button>
+<div id="hud">
+  <div id="hd"><b id="hy">Welcome</b><span id="hl">Entering the hall</span></div>
+  <div id="bar"><i></i></div>
+  <button class="b2" id="auto" type="button">Auto-walk</button>
+  <button class="b2" id="skip" type="button">Skip to CV</button>
+</div>
+
+<main id="cv" aria-label="Full curriculum vitae"><div class="wrap2">
   <h1>Curriculum vitae</h1>
-  <ul class="meta">
-    <li>Prabin Karki</li>
-    <li>Kathmandu, Nepal</li>
+  <ul class="meta"><li>Prabin Karki</li><li>Kathmandu, Nepal</li>
     <li><a href="mailto:prabinkarki8247@gmail.com">prabinkarki8247@gmail.com</a></li>
-    <li><a href="https://orcid.org/0000-0002-5884-1254" target="_blank" rel="noopener">ORCID 0000-0002-5884-1254</a></li>
-  </ul>
-  <div class="tools">
-    <a class="btn pri" href="Prabin_Karki_CV.pdf" download>Download PDF</a>
-    <button class="btn" type="button" onclick="window.print()">Print</button>
-  </div>
+    <li><a href="https://orcid.org/0000-0002-5884-1254" target="_blank" rel="noopener">ORCID 0000-0002-5884-1254</a></li></ul>
+  <div class="tools"><a class="btn pri" href="Prabin_Karki_CV.pdf" download>Download PDF</a>
+    <button class="btn" id="prt" type="button">Print</button>
+    <button class="btn" id="back" type="button">Back to corridor</button></div>
+  <div id="content"><noscript>This page needs JavaScript to display the CV.</noscript></div>
+  <footer>© 2026 Prabin Karki. Kathmandu, Nepal.</footer>
+</div></main>
 
-  <section>
-    <h2>Research profile</h2>
-    <p class="profile">Public health officer at the Epidemiology and Disease Control Division, Government of Nepal, with an MPH (Distinction) from Tribhuvan University. My research focuses on the health of older adults in Nepal, including the determinants of successful aging. I have co-authored four original research articles, am a named collaborator on four Global Burden of Disease publications, and serve as a peer reviewer for seven journals. I am seeking doctoral training in epidemiology.</p>
-  </section>
+<script>
+(function(){
+"use strict";
+var root=document.documentElement;
+function $(s){return document.querySelector(s)}
+function showError(msg){
+  var d=document.getElementById("err");
+  if(!d){d=document.createElement("div");d.id="err";document.body.appendChild(d)}
+  d.textContent="Script error: "+msg;
+}
+window.addEventListener("error",function(e){showError(e.message+" (line "+e.lineno+")")});
 
-  <section>
-    <h2>Education</h2>
-    <div class="entry"><div class="when">2022 – 2024</div><div><h3>Master of Public Health (Distinction)</h3><span class="org">Central Department of Public Health, Institute of Medicine, Tribhuvan University</span></div></div>
-    <div class="entry"><div class="when">2015 – 2019</div><div><h3>Bachelor in Public Health (First Division)</h3><span class="org">Maharajgunj Medical Campus, Institute of Medicine, Tribhuvan University</span></div></div>
-    <div class="entry"><div class="when">2013</div><div><h3>General Science, +2 (Distinction)</h3><span class="org">Morgan International College, HSEB</span></div></div>
-    <div class="entry"><div class="when">2011</div><div><h3>School Leaving Certificate (Distinction)</h3><span class="org">Sagarmatha Higher Secondary English Boarding School, Udayapur</span></div></div>
-  </section>
+/* ================= CV DATA ================= */
+var D={
+profile:"Public health officer at the Epidemiology and Disease Control Division, Government of Nepal, with an MPH (Distinction) from Tribhuvan University. My research focuses on the health of older adults in Nepal, including the determinants of successful aging. I have co-authored four original research articles, am a named collaborator on four Global Burden of Disease publications, and serve as a peer reviewer for seven journals. I am seeking doctoral training in epidemiology.",
+education:[
+["2022 – 2024","Master of Public Health (Distinction)","Central Department of Public Health, Institute of Medicine, Tribhuvan University"],
+["2015 – 2019","Bachelor in Public Health (First Division)","Maharajgunj Medical Campus, Institute of Medicine, Tribhuvan University"],
+["2013","General Science, +2 (Distinction)","Morgan International College, HSEB"],
+["2011","School Leaving Certificate (Distinction)","Sagarmatha Higher Secondary English Boarding School, Udayapur"]
+],
+jobs:[
+{y:"Jan 2026 – Present",t:"Public Health Officer",o:"Epidemiology and Disease Control Division, Department of Health Services, Government of Nepal",b:[
+"Led the preparation of national documents: the M&E framework for epidemic management, water quality surveillance reference packages and the M&E checklist for health insurance.",
+"Contribute to drafting national policies, strategies, standards, protocols and guidelines on epidemiology, outbreak management and health emergency preparedness.",
+"Coordinate with federal, provincial, local and multi-sectoral authorities on epidemiological management, disaster response and annual work plans.",
+"Monitor and supervise surveillance, outbreak preparedness and disaster management programmes, providing timely feedback.",
+"Supported Mass Drug Administration (MDA) coverage surveys in Rautahat District, including field data collection and monitoring.",
+"Facilitated the five-day Rapid Response Team (RRT) training."]},
+{y:"Oct 2024 – Jan 2026",t:"Public Health Officer",o:"Ministry of Health, Bagmati Province",b:[
+"Contributed to provincial health policies and strategies, including the provincial population policy and health strategic framework.",
+"Monitored, supervised and evaluated public health programmes across provincial and local levels.",
+"Coordinated multi-sectoral work on immunisation, maternal and child health, adolescent health, disease prevention, nutrition and environmental health.",
+"Coordinated and evaluated programmes run by national and international NGOs in the province.",
+"Built a KoboToolbox reporting channel to track programme indicators and led the operation of GIOMS and HRRS.",
+"Prepared reports and the annual budget plan, and delivered staff trainings."]},
+{y:"Nov 2023 – Feb 2024",t:"Monitoring and Evaluation Officer (part-time)",o:"Creative Solution for Health Pvt Ltd",b:[
+"Conducted a baseline study of maternal and newborn health in Kalikot District.",
+"Monitored surveys and data quality, reviewing recorded interviews and giving daily feedback to enumerators and supervisors.",
+"Cleaned and analysed data in SPSS."]},
+{y:"Sep – Nov 2023",t:"Intern",o:"Nepal CRS Company",b:["Supported the M&E and programme teams on the Momentum Private Healthcare Delivery project, including field activities and monthly reports."]},
+{y:"Jun – Jul 2023",t:"Public Health Consultant (part-time)",o:"Budhanilkantha Municipality, Kathmandu",b:["Developed the municipality’s health contingency plan and held stakeholder meetings."]},
+{y:"Dec 2020 – Apr 2022",t:"Officer, Monitoring and Evaluation",o:"Karuna Foundation Nepal, Morang (Disability Prevention and Rehabilitation Program)",b:[
+"Supported the programme team in developing annual work plans aligned with programme activities.",
+"Led the implementation of the Management Information System (MIS) in the municipalities.",
+"Coordinated with provincial and central teams on baseline, mid-line and end-line surveys and led local data validation.",
+"Conducted field visits to review the implementation of M&E standards and provided technical backstopping.",
+"Ensured timely reporting to provincial and central offices and promoted the use of reporting tools and templates."]},
+{y:"Dec 2019 – Nov 2020",t:"Associate Officer, Programme (Lead M&E)",o:"Karuna Foundation Nepal, Sunsari",b:["Scaling Up WASH in Nepal: planned, monitored and reported on WASH, SRHR, health, nutrition, gender and livelihood activities."]},
+{y:"Jun – Dec 2019",t:"Monitoring and Evaluation Officer",o:"Global Action Nepal, Lamjung",b:["Sisters for Sisters’ Education programme: collected and validated district data and gave feedback.","Developed and implemented a monitoring plan and led technical M&E support."]},
+{y:"May 2019",t:"Field Researcher",o:"Partnership for Social Development",b:["Contributed to the end-line survey on maternal, neonatal and child health in Jajarkot District, covering quantitative and qualitative data collection and analysis."]},
+{y:"Apr – Aug 2018",t:"Intern",o:"Karuna Foundation Nepal, Rasuwa (Holistic Development Project)",b:["Ran workshops on inclusive and peer-to-peer education.","Assisted with health post construction follow-up, menstrual health management, SRHR and early childhood development."]}
+],
+original:[
+{a:"Karki P, Sapkota KP, Pradhan PMS, Suvedi BK, Bhurtyal A",t:"Successful aging and its associated factors among older adults in Nepal: a cross-sectional study",j:"BMC Geriatrics",v:"2025;25:657",doi:"10.1186/s12877-025-06335-4"},
+{a:"Gaire M, Gautam L, Karki P, Poudel L, Khanal S",t:"Dating violence prevalence and factors associated among undergraduate public health students of Kathmandu metropolitan city, Nepal: a cross-sectional study",j:"BMJ Open",v:"2024;14:e081516",doi:"10.1136/bmjopen-2023-081516"},
+{a:"Karki P, Shahi PV, Sapkota KP, Bhandari R, Adhikari N, Shrestha B",t:"Depressive symptoms and associated factors among persons with physical disabilities in disability care homes of Kathmandu district, Nepal: a mixed method study",j:"PLOS Global Public Health",v:"2023;3(1):e0001461",doi:"10.1371/journal.pgph.0001461"},
+{a:"Bucha B, Karki P, Singh PM",t:"Nutritional status of under five children and its associated factors in urban slums of Kathmandu Valley, Nepal",j:"One Health Journal of Nepal",v:"2023;3(5):11–17",doi:""}
+],
+gbd:[
+{a:"GBD 2021 Diarrhoeal Diseases Collaborators",t:"Global, regional, and national age-sex-specific burden of diarrhoeal diseases, their risk factors, and aetiologies, 1990–2021, for 204 countries and territories",j:"The Lancet Infectious Diseases",v:"2025",doi:"10.1016/S1473-3099(24)00691-1"},
+{a:"GBD 2021 Smoking Collaborators",t:"Forecasting the effects of smoking prevalence scenarios on years of life lost and life expectancy from 2022 to 2050",j:"The Lancet Public Health",v:"2024",doi:"10.1016/S2468-2667(24)00166-X"},
+{a:"GBD 2021 Stroke Collaborators",t:"Global, regional, and national burden of stroke and its risk factors, 1990–2021",j:"The Lancet Neurology",v:"2024",doi:"10.1016/S1474-4422(24)00369-7"},
+{a:"GBD 2022 Cardiovascular Disease Collaborators",t:"Global burden of cardiovascular diseases and risks, 1990–2022",j:"Journal of the American College of Cardiology",v:"2023",doi:"10.1016/j.jacc.2023.11.007"}
+],
+review:[
+"Undiagnosed hypertension and its associated factors: a cross-sectional study among adults in a rural municipality of Nepal.",
+"Depressive symptoms and suicidal attempts in sexual and gender minorities and heterosexual cisgender people of Nepal: a mixed-methods study.",
+"Parent-adolescent communication on sexual and reproductive health and its associated factors in Jhapa, Nepal: a cross-sectional study."
+],
+prep:["Determinants of successful aging in Western Nepal: a cross-sectional study."],
+peer:[
+["4 articles","INQUIRY: The Journal of Health Care Organization, Provision, and Financing"],
+["2 articles","BMC Geriatrics"],["2 articles","PLOS Global Public Health"],
+["1 article","Journal of Nepal Medical Association (JNMA)"],["1 article","BJPsych International"],
+["1 article","BMC Psychology"],["1 article","Discover Public Health"]
+],
+awards:[
+["2026 – Present","Data Fellowship","Code for Nepal with DataCamp and TechPana (R for Data Scientists)"],
+["2023","Sigma Xi Grants-in-Aid of Research","Principal Investigator"],
+["2023","DsAcademy Seed Grant","Principal Investigator"],
+["2022 – 2024","Postgraduate Scholarship (fully funded)","Medical Education Commission, Government of Nepal, for the MPH"],
+["2019","Poster Presentation, Bronze Medal","National Young Scientist Conference 2019, RECAST"]
+],
+training:[
+["2026","Training of Trainers, Rapid Response Team (RRT)",""],
+["2026","Training of Trainers, Community Based Surveillance Program (SORMAS)",""],
+["2022","Research Data Analysis with R","30 hours, online"],
+["2020","DHIS2 Training","Provincial Health Directorate, Koshi Province"],
+["2019","Advanced Excel Training","Mentor Institute of Technologies"],
+["2018","Conference on Accelerating the Implementation of ICPD","IYAFP-Nepal"]
+],
+volunteer:[
+["2016 – 2017","Visible Impact Nepal","No Shame To Bleed campaign: helped develop a menstrual health management manual and ran school workshops"],
+["2015","2015 Gorkha earthquake response","Volunteered in disaster management"]
+],
+members:["Physicians for Social Responsibility Nepal","Nepal Public Health Students’ Society","International Youth Alliance for Family Planning"],
+skills:["R","SPSS","EpiData","DHIS2","KoboToolbox","Advanced Excel","MS Access","EndNote","Zotero"]
+};
 
-  <section>
-    <h2>Publications</h2>
-    <p class="pubgroup">Original research</p>
-    <ol class="pubs">
-      <li><strong>Karki P</strong>, Sapkota KP, Pradhan PMS, Suvedi BK, Bhurtyal A. Successful aging and its associated factors among older adults in Nepal: a cross-sectional study. <em>BMC Geriatrics</em>. 2025;25:657. <a href="https://doi.org/10.1186/s12877-025-06335-4" target="_blank" rel="noopener">doi:10.1186/s12877-025-06335-4</a></li>
-      <li>Gaire M, Gautam L, <strong>Karki P</strong>, Poudel L, Khanal S. Dating violence prevalence and factors associated among undergraduate public health students of Kathmandu metropolitan city, Nepal: a cross-sectional study. <em>BMJ Open</em>. 2024;14:e081516. <a href="https://doi.org/10.1136/bmjopen-2023-081516" target="_blank" rel="noopener">doi:10.1136/bmjopen-2023-081516</a></li>
-      <li><strong>Karki P</strong>, Shahi PV, Sapkota KP, Bhandari R, Adhikari N, Shrestha B. Depressive symptoms and associated factors among persons with physical disabilities in disability care homes of Kathmandu district, Nepal: a mixed method study. <em>PLOS Global Public Health</em>. 2023;3(1):e0001461. <a href="https://doi.org/10.1371/journal.pgph.0001461" target="_blank" rel="noopener">doi:10.1371/journal.pgph.0001461</a></li>
-      <li>Bucha B, <strong>Karki P</strong>, Singh PM. Nutritional status of under five children and its associated factors in urban slums of Kathmandu Valley, Nepal. <em>One Health Journal of Nepal</em>. 2023;3(5):11–17.</li>
-    </ol>
+/* ================= helpers ================= */
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function yr(s){var m=String(s).match(/\d{4}/);return m?m[0]:""}
+function clip(t,n){return t.length>n?t.slice(0,n-1)+"…":t}
+function sm(t){return t*t*(3-2*t)}
+function cl(v,a,b){a=a===undefined?0:a;b=b===undefined?1:b;return Math.min(b,Math.max(a,v))}
 
-    <p class="pubgroup">Global Burden of Disease collaborations (named collaborator)</p>
-    <ol class="pubs">
-      <li>GBD 2021 Diarrhoeal Diseases Collaborators. Global, regional, and national age-sex-specific burden of diarrhoeal diseases, their risk factors, and aetiologies, 1990–2021, for 204 countries and territories. <em>The Lancet Infectious Diseases</em>. 2025. <a href="https://doi.org/10.1016/S1473-3099(24)00691-1" target="_blank" rel="noopener">doi:10.1016/S1473-3099(24)00691-1</a></li>
-      <li>GBD 2021 Smoking Collaborators. Forecasting the effects of smoking prevalence scenarios on years of life lost and life expectancy from 2022 to 2050. <em>The Lancet Public Health</em>. 2024. <a href="https://doi.org/10.1016/S2468-2667(24)00166-X" target="_blank" rel="noopener">doi:10.1016/S2468-2667(24)00166-X</a></li>
-      <li>GBD 2021 Stroke Collaborators. Global, regional, and national burden of stroke and its risk factors, 1990–2021. <em>The Lancet Neurology</em>. 2024. <a href="https://doi.org/10.1016/S1474-4422(24)00369-7" target="_blank" rel="noopener">doi:10.1016/S1474-4422(24)00369-7</a>
+/* ================= 1. full CV (rendered first, so it always works) ================= */
+function rows(a){return a.map(function(x){
+  return '<div class="entry"><div class="when">'+esc(x[0])+'</div><div><h3>'+esc(x[1])+'</h3>'+(x[2]?'<span class="org">'+esc(x[2])+'</span>':"")+'</div></div>'}).join("")}
+function cite(p){
+  var a=esc(p.a).replace("Karki P","<strong>Karki P</strong>");
+  return a+". "+esc(p.t)+". <em>"+esc(p.j)+"</em>. "+esc(p.v)+"."+(p.doi?' <a href="https://doi.org/'+p.doi+'" target="_blank" rel="noopener">doi:'+p.doi+'</a>':"");
+}
+function ol(items){return '<ol class="pubs">'+items.map(function(x){return "<li>"+x+"</li>"}).join("")+"</ol>"}
+var SEC=[
+["Research profile",function(){return '<p class="profile">'+esc(D.profile)+"</p>"}],
+["Education",function(){return rows(D.education)}],
+["Publications",function(){
+  return '<p class="pubgroup">Original research</p>'+ol(D.original.map(cite))+
+   '<p class="pubgroup">Global Burden of Disease collaborations (named collaborator)</p>'+ol(D.gbd.map(cite))+
+   '<p class="pubgroup">Under review</p>'+ol(D.review.map(esc))+
+   '<p class="pubgroup">In preparation</p>'+ol(D.prep.map(esc))}],
+["Peer review",function(){return rows(D.peer.map(function(r){return [r[0],r[1],""]}))}],
+["Experience",function(){return D.jobs.map(function(j){
+  return '<div class="entry"><div class="when">'+esc(j.y)+'</div><div><h3>'+esc(j.t)+'</h3><span class="org">'+esc(j.o)+'</span><ul>'+j.b.map(function(b){return "<li>"+esc(b)+"</li>"}).join("")+"</ul></div></div>"}).join("")}],
+["Grants and awards",function(){return rows(D.awards)}],
+["Training",function(){return rows(D.training)}],
+["Volunteering",function(){return rows(D.volunteer)}],
+["Professional memberships",function(){return '<ul class="chips">'+D.members.map(function(s){return "<li>"+esc(s)+"</li>"}).join("")+"</ul>"}],
+["Skills",function(){return '<ul class="chips">'+D.skills.map(function(s){return "<li>"+esc(s)+"</li>"}).join("")+"</ul>"}]
+];
+$("#content").innerHTML=SEC.map(function(s){return '<section class="sec"><h2>'+s[0]+"</h2>"+s[1]()+"</section>"}).join("");
+$("#prt").onclick=function(){window.print()};
+
+/* ================= 2. the 3D corridor ================= */
+function buildCorridor(){
+  var body=document.body;
+  /* milestones, oldest first, alternating walls */
+  var M=[];
+  D.education.slice().reverse().forEach(function(e){M.push({y:yr(e[0]),k:"Education",t:e[1],s:e[2],w:e[0],d:[]})});
+  D.jobs.slice().reverse().forEach(function(j){M.push({y:yr(j.y),k:"Role",t:j.t,s:j.o,w:j.y,d:j.b.slice(0,3)})});
+  D.awards.slice().reverse().forEach(function(a){M.push({y:yr(a[0]),k:"Award",t:a[1],s:a[2],w:a[0],d:[]})});
+  D.original.forEach(function(p){M.push({y:yr(p.v),k:"Publication",t:p.t,s:p.j,w:"",d:["Authors: "+p.a]})});
+  M.sort(function(a,b){return a.y-b.y});
+  M.forEach(function(m,i){m.side=i%2?1:-1});
+
+  var SEG=400,START=900,GAP=520,DOOR=480,n=M.length;
+  var L=START+n*GAP+800,POSMAX=L-500,KS=215,AUTOV=260;
+  var SS=M.map(function(_,i){return START+i*GAP});
+
+  var world=$("#world"),objs=[],msE=[],pqE=[],bdE=[];
+  function mk(cls,tf,html,s){
+    var e=document.createElement("div");
+    e.className="o "+cls;e.style.transform=tf;e.innerHTML=html||"";
+    world.appendChild(e);objs.push({e:e,s:s,v:true});return e;
+  }
+
+  /* corridor sections */
+  var segHtml='<i class="fl"><b class="rn"></b></i><i class="cl"><b class="lt" style="top:60px"></b><b class="lt" style="top:260px"></b></i><i class="wl l"></i><i class="wl r"></i>';
+  for(var i=0;i*SEG<=L+SEG;i++){mk("g","translate3d(0,0,"+(-i*SEG)+"px)",segHtml,i*SEG+SEG/2)}
+
+  /* rug, arch and double doors */
+  mk("rug","translate3d(0,165px,-260px) rotateX(90deg)","<div><span>Welcome<small>Prabin Karki</small></span></div>",260);
+  var door=mk("door","translate3d(0,0,"+(-DOOR)+"px)",'<div class="arch"><small>The career hall, 2011–2026</small><b>Prabin Karki</b></div><div class="dlf L"></div><div class="dlf R"></div>',DOOR);
+  var doorL=door.querySelector(".L"),doorR=door.querySelector(".R");
+
+  /* milestones: tile + board on the wall, light patch, year on the floor */
+  M.forEach(function(m,i){
+    var s=SS[i],side=m.side;
+    var lines=m.d.map(function(t){return "<li>"+esc(clip(t,m.k==="Role"?125:160))+"</li>"}).join("");
+    var showdt=m.w&&m.w!==m.y;
+    var e=mk("ms","translate3d("+(side*247)+"px,0,"+(-s)+"px) rotateY("+(-side*90)+"deg)",
+      '<div class="sp"></div>'+
+      '<div class="tl"><span class="yr">'+m.y+'</span>'+(showdt?'<span class="dt">'+esc(m.w)+'</span>':"")+'<span class="kd">'+m.k+'</span><h3>'+esc(clip(m.t,38))+'</h3><span class="rd">Hover to read</span></div>'+
+      '<div class="bd"><div class="bhd"><span class="yr">'+m.y+'</span><div><span class="kd">'+m.k+'</span>'+(showdt?'<span class="dt">'+esc(m.w)+'</span>':"")+'</div><span class="no">'+(i+1)+' of '+n+'</span></div>'+
+      '<div class="bbd"><h3>'+esc(m.t)+'</h3>'+(m.s?'<em>'+esc(m.s)+'</em>':"")+'<ul>'+lines+'</ul></div></div>',s);
+    e.setAttribute("data-i",i);msE.push(e);bdE.push(e.querySelector(".bd"));
+    pqE.push(mk("pq","translate3d(0,165px,"+(-s)+"px) rotateX(90deg)","<div>"+m.y+"</div>",s));
+  });
+
+  /* a few drifting lights, and the end wall */
+  for(var k=0;k<30;k++){
+    var ps=Math.random()*(POSMAX+800),sz=6+Math.random()*9;
+    mk("pt","translate3d("+((Math.random()-.5)*420)+"px,"+(-150+Math.random()*260)+"px,"+(-ps)+"px)",
+      '<b style="width:'+sz+'px;height:'+sz+'px;animation-delay:'+(-Math.random()*4)+'s"></b>',ps);
+  }
+  mk("gate","translate3d(0,0,"+(-(L-300))+"px)","<div>Your full CV<br>unrolls here</div>",L-300);
+
+  /* state */
+  var space=$("#space"),cv=$("#cv"),hint=$("#hint"),hy=$("#hy"),hl=$("#hl"),bar=$("#bar i"),stage=$("#stage"),btn=$("#auto");
+  var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+  var cur=0,open=false,auto=false,posA=0,lastSet=0,last=0,lastNear=-9;
+  var fi=-1,fidx=0,fw=0,focusScroll=0,fp=[0,0],px=0,py=0,coolUntil=0,dwell=null,shown=[];
+
+  function size(){
+    space.style.height=(POSMAX+innerHeight)+"px";
+    var P=Math.max(650,Math.min(1000,innerWidth*.8));stage.style.perspective=P+"px";
+    var nar=innerWidth<700,bw=nar?320:460,bh=nar?460:330;
+    var dist=201+KS;
+    var k=Math.min(Math.min(innerWidth*.9,900)/bw,innerHeight*.7/bh);
+    var rs=root.style;
+    rs.setProperty("--bw",bw+"px");rs.setProperty("--bh",bh+"px");rs.setProperty("--bs",(k*dist/P).toFixed(4));
+  }
+  function setAuto(v){auto=v;btn.classList.toggle("on",v);btn.textContent=v?"Pause":"Auto-walk";if(v){posA=scrollY;lastSet=scrollY}}
+  function focusOn(i){
+    if(open||fi>=0||fw>.15||Math.abs(SS[i]-cur)>1500)return;
+    if(auto)setAuto(false);
+    fi=i;fidx=i;focusScroll=scrollY;fp=[px,py];body.classList.add("reading");
+  }
+  function release(snap){
+    if(fi<0)return;
+    var i=fi;fi=-1;coolUntil=performance.now()+900;body.classList.remove("reading");
+    if(snap){scrollTo(0,SS[i]);posA=SS[i];lastSet=SS[i]}
+  }
+  function setOpen(v){open=v;cv.classList.toggle("open",v);if(v){release(false);setAuto(false);cv.scrollTop=0}}
+  function onScroll(){
+    if(auto&&Math.abs(scrollY-lastSet)>4)setAuto(false);
+    if(fi>=0&&Math.abs(scrollY-focusScroll)>40)release(false);
+  }
+
+  function frame(t){
+    var dt=Math.min(.05,(t-last)/1000||0);last=t;
+    if(auto&&!open&&fi<0&&fw<.02){posA=Math.min(POSMAX,posA+AUTOV*dt);lastSet=posA;scrollTo(0,posA)}
+    var tgt=auto?posA:scrollY,prog=cl(tgt/POSMAX);
+    hint.style.opacity=tgt>60?0:1;
+    if(fi<0){if(!open&&prog>.985)setOpen(true);else if(open&&prog<.96)setOpen(false)}
+    cur+=reduce?tgt-cur:(tgt-cur)*Math.min(1,dt*5);
+    var ft=fi>=0?1:0;
+    fw+=reduce?ft-fw:(ft-fw)*Math.min(1,dt*3.4);
+    if(Math.abs(fw-ft)<.002)fw=ft;
+    var w=sm(cl(fw)),ii=fidx;
+    var sc=cur+(SS[ii]-cur)*w;                 /* camera distance along the hall */
+    var side=M[ii].side;
+    var yaw=side*w*Math.PI/2,cx=-side*KS*w;    /* turn square to the wall and step back from it */
+    world.style.transform="rotateY("+yaw+"rad) translate3d("+(-cx)+"px,0,"+sc+"px)";
+
+    /* lighting, and which board is open */
+    var near=-1,nd=1e9;
+    for(var i=0;i<M.length;i++){
+      var dp=sc-SS[i],ad=Math.abs(dp);
+      if(ad<nd){nd=ad;near=i}
+      var l=dp<0?sm(cl(1+dp/1400)):sm(cl(1-dp/520));
+      if(l>0||msE[i]._l){var v=l.toFixed(3);msE[i].style.setProperty("--l",v);pqE[i].style.setProperty("--l",v);msE[i]._l=l>0}
+      var sh=(fi===i&&fw>.55);
+      if(sh!==!!shown[i]){shown[i]=sh;msE[i].classList.toggle("show",sh)}
+    }
+    if(sc<SS[0]-500)near=-1;
+
+    /* doors swing open as you approach */
+    var p=sm(cl((sc-(DOOR-460))/340)),a=p*86;
+    doorL.style.transform="rotateY("+a+"deg)";doorR.style.transform="rotateY("+(-a)+"deg)";
+
+    for(var j=0;j<objs.length;j++){
+      var o=objs[j],vis=o.s>sc-700&&o.s<sc+3200;
+      if(vis!==o.v){o.v=vis;o.e.style.display=vis?"":"none"}
+    }
+    if(near!==lastNear){lastNear=near;
+      if(near<0){hy.textContent="Welcome";hl.textContent="Entering the hall"}
+      else{hy.textContent=M[near].y;hl.textContent=M[near].k+": "+clip(M[near].t,34)}}
+    bar.style.width=(prog*100)+"%";
+    requestAnimationFrame(frame);
+  }
+
+  /* wiring */
+  function goEnd(){release(false);setAuto(false);scrollTo({top:POSMAX,behavior:"smooth"})}
+  function goBack(){scrollTo({top:POSMAX*.9,behavior:"smooth"})}
+  addEventListener("scroll",onScroll,{passive:true});
+  addEventListener("resize",size);
+  $("#skip").onclick=goEnd;$("#back").onclick=goBack;
+  $("#cont").onclick=function(){release(true)};
+  btn.onclick=function(){if(!open){release(false);setAuto(!auto)}};
+  cv.addEventListener("wheel",function(e){if(e.deltaY<0&&cv.scrollTop<=0)goBack()},{passive:true});
+  addEventListener("wheel",function(){if(fi>=0)release(true)},{passive:true});
+  addEventListener("keydown",function(e){
+    if(e.key==="Escape"){if(fi>=0)release(true);else if(open)goBack()}
+    if(e.key===" "&&!open){e.preventDefault();if(fi>=0)release(true);else setAuto(!auto)}
+  });
+  /* hover a tile: after a short pause the camera walks over, turns and opens it */
+  addEventListener("mousemove",function(e){
+    px=e.clientX;py=e.clientY;
+    if(fi>=0&&fw>.85){
+      var r=bdE[fi].getBoundingClientRect(),m=40;
+      var out=px<r.left-m||px>r.right+m||py<r.top-m||py>r.bottom+m;
+      if(out&&Math.hypot(px-fp[0],py-fp[1])>80)release(true);
+    }
+  });
+  stage.addEventListener("mouseover",function(e){
+    var tl=e.target.closest&&e.target.closest(".tl");if(!tl)return;
+    var i=+tl.parentNode.getAttribute("data-i");clearTimeout(dwell);
+    dwell=setTimeout(function(){if(performance.now()>coolUntil)focusOn(i)},220);
+  });
+  stage.addEventListener("mouseout",function(e){if(e.target.closest&&e.target.closest(".tl"))clearTimeout(dwell)});
+  stage.addEventListener("click",function(e){
+    var tl=e.target.closest(".tl");
+    if(tl){focusOn(+tl.parentNode.getAttribute("data-i"));return}
+    if(fi>=0&&!e.target.closest(".bd"))release(true);
+  });
+
+  root.classList.add("js");          /* 3D mode is on only after everything above succeeded */
+  size();requestAnimationFrame(frame);
+}
+
+try{buildCorridor()}catch(err){root.classList.remove("js");showError(err.message+" (3D disabled, showing the plain CV)")}
+})();
+</script>
+</body>
+</html>
