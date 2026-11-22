@@ -5,169 +5,68 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CV | Prabin Karki</title>
 <style>
-:root{--ink:#12262e;--mute:#566a72;--line:#dbe3e2;--acc:#0b5d63;--tint:#e3eeee;--sig:#c8821a;--bw:460px;--bh:330px;--bs:1}
+:root{--ink:#12262e;--mute:#566a72;--line:#dbe3e2;--acc:#0b5d63;--tint:#e3eeee;--sig:#c8821a}
 *{box-sizing:border-box}
-html,body{margin:0}
-body{background:#fff;color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body{margin:0;background:#f4f7f7;color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.15;margin:0 0 .3em}
 a{color:var(--acc)}
-a:focus-visible,button:focus-visible{outline:3px solid var(--sig);outline-offset:2px}
-
-header{position:fixed;top:0;left:0;right:0;z-index:40;background:rgba(8,17,22,.92)}
-header .wrap{max-width:1040px;margin:auto;padding:.55rem 1.1rem;display:flex;justify-content:space-between;align-items:center;gap:.8rem;flex-wrap:wrap;min-height:58px}
-.brand{font:700 1.15rem Georgia,serif;color:#f7f8f5;text-decoration:none}
+header{position:fixed;top:0;left:0;right:0;z-index:40;background:rgba(8,17,22,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+header .wrap{max-width:1040px;margin:auto;padding:.55rem 1.1rem;display:flex;justify-content:space-between;align-items:center;gap:.8rem;flex-wrap:wrap;min-height:60px}
+.brand{font:700 1.15rem Georgia,serif;color:#F7F8F5;text-decoration:none}.brand span{color:#167D8D}
 nav{display:flex;gap:.35rem;flex-wrap:wrap;margin-left:auto}
-nav a{padding:.35rem .65rem;border:1px solid transparent;border-radius:8px;color:#b8c8cb;font-size:.87rem;text-decoration:none}
-nav a:hover,nav a[aria-current]{color:#f7f8f5;background:rgba(22,125,141,.18);border-color:rgba(22,125,141,.5)}
-
-/* ---------- plain fallback: the CV is simply a page ---------- */
-#stage,.fog,#hud,#hint,#cont,#back{display:none}
-#cv{background:#f5f7f6;padding-top:80px;min-height:100vh}
-.wrap2{max-width:960px;margin:auto;padding:0 1.1rem}
-
-/* ---------- 3D mode ---------- */
-.js #space{width:1px}
-.js #stage{display:block;position:fixed;inset:0;overflow:hidden;perspective:900px;perspective-origin:50% 52%;background:#fff}
-.js .fog{display:block}
-.js #hud{display:flex}
-.js #hint{display:block}
-.js #back{display:inline-block}
-.js body.reading #cont{display:block}
-.js #cv{position:fixed;inset:0;z-index:30;overflow:auto;overscroll-behavior:contain;min-height:0;
- clip-path:inset(0 0 100% 0);visibility:hidden;transition:clip-path 1.3s cubic-bezier(.65,0,.25,1),visibility 0s 1.3s}
-.js #cv.open{clip-path:inset(0);visibility:visible;transition:clip-path 1.3s cubic-bezier(.65,0,.25,1)}
-
-#world{position:absolute;left:50%;top:52%;width:0;height:0;transform-style:preserve-3d;will-change:transform}
-#world>*{position:absolute;left:0;top:0;transform-style:preserve-3d}
-.g i{position:absolute;left:0;top:0;display:block;transform-origin:0 0}
-
-/* white corridor: floor, ceiling, two walls per 400px section */
-.fl{width:500px;height:402px;transform:translate3d(-250px,170px,0) rotateX(-90deg);
- background:repeating-linear-gradient(0deg,rgba(0,0,0,.06) 0 1px,transparent 1px 100px),repeating-linear-gradient(90deg,#eef2f2 0 124px,#dfe6e6 124px 125px)}
-.fl .rn{position:absolute;left:190px;top:0;bottom:0;width:120px;background:linear-gradient(90deg,#d79a2e 0 3px,#0f7079 3px calc(100% - 3px),#d79a2e calc(100% - 3px))}
-.cl{width:500px;height:402px;transform:translate3d(-250px,-170px,0) rotateX(-90deg);background:#f8fafa}
-.cl .lt{position:absolute;left:190px;width:120px;height:80px;background:#fff;box-shadow:0 0 40px 22px rgba(255,238,200,.85)}
-.wl{width:402px;height:340px;
- background:repeating-linear-gradient(90deg,transparent 0 199px,rgba(0,0,0,.05) 199px 201px),
- linear-gradient(#e6ebeb 0,#fff 14%,#fff 66%,#eef2f2 66%,#e8eeee 92%,#b9c6c6 92%,#9fb0b0 100%)}
-.wl::before{content:"";position:absolute;left:0;right:0;top:66%;height:3px;background:linear-gradient(#d79a2e,#f0c36b)}
-.wl.l{transform:translate3d(-250px,-170px,0) rotateY(90deg)}
-.wl.r{transform:translate3d(250px,-170px,0) rotateY(90deg)}
-
-/* entry: arch, double doors, welcome rug */
-.arch{position:absolute;left:-250px;top:-170px;width:500px;height:70px;display:grid;place-items:center;align-content:center;text-align:center;
- background:linear-gradient(#fff,#f1f5f5);border-bottom:5px solid #d79a2e;box-shadow:0 8px 24px rgba(0,0,0,.12)}
-.arch small{font:600 .75rem system-ui;color:var(--acc)}
-.arch b{font:700 1.7rem Georgia,serif;line-height:1.1}
-.dlf{position:absolute;top:-100px;width:247px;height:270px;background:linear-gradient(90deg,#fff,#eef3f3);
- box-shadow:inset 0 0 0 12px #f7f9f9,inset 0 0 0 15px #d79a2e,inset 0 0 0 38px #fff,inset 0 0 0 40px #cdd8d8,0 0 30px rgba(0,0,0,.12)}
-.dlf.L{left:-247px;transform-origin:0 0}
-.dlf.R{left:0;transform-origin:100% 0}
-.dlf::after{content:"";position:absolute;top:130px;width:10px;height:44px;border-radius:5px;background:linear-gradient(#f0c36b,#a8731a)}
-.dlf.L::after{right:22px}.dlf.R::after{left:22px}
-.rug div{position:absolute;left:-130px;top:-62px;width:260px;height:124px;display:grid;place-items:center;text-align:center;border-radius:12px;
- background:linear-gradient(#0f7079,#0b5d63);color:#fff;font:700 1.7rem Georgia,serif;line-height:1.2;
- box-shadow:inset 0 0 0 6px #0b5d63,inset 0 0 0 8px #f0c36b,0 0 30px rgba(11,93,99,.35)}
-.rug small{display:block;font:600 .85rem system-ui;color:#f0c36b}
-
-/* milestones: a small tile on the wall that opens into a large board */
-.ms .tl,.ms .bd{position:absolute;background:#fff;border-radius:8px}
-.ms .sp{position:absolute;left:-260px;top:-170px;width:520px;height:340px;pointer-events:none;transform:translateZ(1px);
- background:radial-gradient(ellipse at 50% 50%,rgba(255,226,160,.85),rgba(255,226,160,0) 68%);opacity:calc(var(--l,0)*.85)}
-.ms .tl{left:-95px;top:-75px;width:190px;height:150px;padding:12px 15px;cursor:pointer;overflow:hidden;
- border:1px solid rgba(11,93,99,calc(.2 + var(--l,0)*.6));border-top:4px solid var(--sig);
- box-shadow:0 8px 26px rgba(11,93,99,calc(.08 + var(--l,0)*.3));
- transform:translateZ(calc(12px + var(--l,0)*10px));opacity:calc(.72 + var(--l,0)*.28)}
-.ms .tl:hover{box-shadow:0 0 0 3px rgba(200,130,26,.55),0 14px 34px rgba(200,130,26,.4)}
-.ms.show .tl{opacity:0}
-.yr{display:block;font:700 2.6rem/1 Georgia,serif;color:var(--sig)}
-.kd{font-size:.72rem;color:var(--acc);font-weight:700}
-.dt{display:block;font-size:.74rem;font-weight:600;margin:.1rem 0 .15rem}
-.tl h3{font-size:.86rem;margin:.25rem 0 0}
-.tl .rd{position:absolute;right:12px;bottom:7px;font:700 .68rem system-ui;color:var(--sig)}
-.bd{left:calc(var(--bw)/-2);top:calc(var(--bh)/-2);width:var(--bw);height:var(--bh);overflow:hidden;opacity:0;pointer-events:none;
- border:1px solid #cfd9d9;border-top:6px solid var(--sig);
- box-shadow:0 30px 70px rgba(11,93,99,.28),0 0 0 8px rgba(255,255,255,.9);
- transform:translateZ(10px) scale(.25);transition:transform .8s cubic-bezier(.2,1.1,.3,1),opacity .45s}
-.ms.show .bd{opacity:1;pointer-events:auto;transform:translateZ(46px) scale(var(--bs))}
-.bhd{display:flex;align-items:center;gap:14px;padding:12px 22px 8px;background:linear-gradient(#eef6f6,#fff);border-bottom:1px solid var(--line)}
-.bhd .yr{font-size:3.1rem}
-.bhd .dt{font-size:.85rem}
-.bhd .no{margin-left:auto;font:600 .75rem system-ui;color:var(--mute)}
-.bbd{padding:10px 22px}
-.bbd h3{font-size:1.15rem;margin:0 0 .2rem}
-.bbd em{display:block;color:var(--acc);font-size:.8rem;font-style:normal;font-weight:600;margin-bottom:.3rem}
-.bbd ul{margin:.2rem 0 0;padding-left:1.1rem;font-size:.78rem;line-height:1.42;color:#33464d}
-.bbd li{margin-bottom:.22rem}
-.pq div{position:absolute;left:-75px;top:-34px;width:150px;height:68px;display:grid;place-items:center;border:2px solid var(--sig);border-radius:10px;background:#fff;
- font:700 2.1rem Georgia,serif;color:var(--sig);opacity:calc(.5 + var(--l,0)*.5);box-shadow:0 0 calc(var(--l,0)*44px) rgba(200,130,26,.65)}
-.pt b{position:absolute;display:block;border-radius:50%;background:radial-gradient(circle,rgba(200,130,26,.9),rgba(200,130,26,0) 70%);animation:float 4s ease-in-out infinite}
-@keyframes float{50%{transform:translateY(-30px)}}
-.gate div{position:absolute;left:-250px;top:-170px;width:500px;height:340px;display:grid;place-items:center;text-align:center;
- background:radial-gradient(circle,#fff 30%,#fdf1d9);font:700 2rem Georgia,serif;color:var(--sig)}
-
-.fog{position:fixed;inset:0;z-index:5;pointer-events:none;transition:opacity .5s;
- background:radial-gradient(ellipse 14% 18% at 50% 52%,rgba(255,255,255,.95) 0,rgba(255,255,255,0) 100%),radial-gradient(ellipse at 50% 50%,transparent 62%,rgba(11,93,99,.09) 100%)}
-body.reading .fog{opacity:0}
-#hud{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:.7rem 1.2rem;align-items:center;gap:1rem;color:var(--mute);font-size:.85rem;
- background:linear-gradient(transparent,rgba(255,255,255,.94) 40%);pointer-events:none}
-#hud .b2{pointer-events:auto}
+nav a{padding:.35rem .65rem;border:1px solid transparent;border-radius:8px;color:#B8C8CB;font-size:.87rem;text-decoration:none}
+nav a:hover,nav a.on{color:#F7F8F5;background:rgba(22,125,141,.16);border-color:rgba(22,125,141,.42)}
+nav a.glow-button{color:#F7F8F5;background:rgba(22,125,141,.18);border-color:rgba(22,125,141,.55)}
+#space{width:1px}
+#gl{position:fixed;inset:0;z-index:1;display:block;width:100%;height:100%}
+#hud{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:.7rem 1.2rem;display:flex;align-items:center;gap:1rem;color:var(--mute);font-size:.85rem;background:linear-gradient(transparent,rgba(255,255,255,.94) 40%)}
 #hd{display:flex;align-items:baseline;gap:.6rem;min-width:0}
 #hy{font:700 2rem Georgia,serif;color:var(--sig);min-width:3.6ch}
 #hl{max-width:30ch;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink);font-weight:600}
-#bar{flex:1;height:3px;background:#dbe3e2;border-radius:3px;overflow:hidden}
-#bar i{display:block;height:100%;width:0;background:var(--sig)}
+#bar{flex:1;height:3px;background:#dbe3e2;border-radius:3px;overflow:hidden}#bar i{display:block;height:100%;width:0;background:var(--sig)}
 .b2{color:var(--acc);background:#fff;border:1.5px solid var(--acc);border-radius:8px;padding:.3rem .7rem;font:inherit;font-size:.82rem;font-weight:600;cursor:pointer;white-space:nowrap}
 .b2.on{background:var(--acc);color:#fff}
-#cont{position:fixed;left:50%;bottom:4.8rem;transform:translateX(-50%);z-index:25;padding:.5rem 1.1rem;font-size:.92rem;box-shadow:0 6px 20px rgba(11,93,99,.25)}
-#hint{position:fixed;left:50%;bottom:5rem;transform:translateX(-50%);z-index:20;color:var(--acc);font-weight:600;text-align:center;animation:bob 1.6s ease-in-out infinite;transition:opacity .6s;pointer-events:none}
+#cont{display:none;position:fixed;left:50%;bottom:4.8rem;transform:translateX(-50%);z-index:25;padding:.5rem 1.1rem;font-size:.92rem;box-shadow:0 6px 20px rgba(11,93,99,.25)}
+body.reading #cont{display:block}
+#hint{position:fixed;left:50%;bottom:5rem;transform:translateX(-50%);z-index:20;color:var(--acc);font-weight:600;letter-spacing:.06em;text-align:center;animation:bob 1.6s ease-in-out infinite;transition:opacity .6s;pointer-events:none}
 @keyframes bob{50%{transform:translate(-50%,8px)}}
-
-/* ---------- full CV ---------- */
+#cv{position:fixed;inset:0;z-index:30;background:#f5f7f6;overflow:auto;overscroll-behavior:contain;padding-top:80px;clip-path:inset(0 0 100% 0);visibility:hidden;transition:clip-path 1.3s cubic-bezier(.65,0,.25,1),visibility 0s 1.3s}
+#cv.open{clip-path:inset(0);visibility:visible;transition:clip-path 1.3s cubic-bezier(.65,0,.25,1)}
+.wrap2{max-width:960px;margin:auto;padding:0 1.1rem}
 .meta{display:flex;flex-wrap:wrap;gap:.25rem 1rem;color:var(--mute);margin:.4rem 0;padding:0;list-style:none;font-size:.9rem}
 .tools{display:flex;flex-wrap:wrap;gap:.5rem;margin:.9rem 0 1.2rem}
 .btn{display:inline-block;padding:.45rem .85rem;border-radius:8px;border:1.5px solid var(--acc);color:var(--acc);text-decoration:none;font:inherit;font-size:.9rem;font-weight:600;cursor:pointer;background:none}
 .btn.pri{background:var(--acc);color:#fff}
-.sec{margin:0 0 1.2rem}
-.sec h2{font-size:1.35rem;padding-bottom:.2rem;border-bottom:2px solid var(--sig);display:inline-block}
-.profile{max-width:72ch;font-family:Georgia,serif;font-size:1.02rem}
-.entry{display:grid;grid-template-columns:150px 1fr;gap:.15rem .8rem;padding:.4rem 0;border-bottom:1px solid var(--line);font-size:.92rem}
-.when{color:var(--mute);font-size:.85rem}
-.org{display:block;color:var(--acc);font-size:.89rem}
-.entry h3{font-size:1rem;margin:0}
-.entry ul{margin:.3rem 0;padding-left:1.1rem;font-size:.9rem}
-.pubgroup{margin:.9rem 0 .3rem;font:600 .93rem system-ui;color:var(--acc)}
-ol.pubs{margin:0;padding-left:1.4rem;max-width:82ch;font-size:.92rem}
-ol.pubs li{margin-bottom:.6rem}
+.sec{margin:0 0 1rem}.sec h2{font-size:1.35rem;padding-bottom:.2rem;border-bottom:1px solid var(--sig);display:inline-block}
+.entry{display:grid;grid-template-columns:135px 1fr;gap:.15rem .8rem;padding:.35rem 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.when{color:var(--mute);font-size:.85rem}.org{display:block;color:var(--acc);font-size:.89rem}
+.entry h3{font-size:1rem;margin:0}.entry ul{margin:.3rem 0;padding-left:1.1rem;font-size:.9rem}
+.pub{display:block;max-width:80ch}.tag{color:var(--sig);font-size:.78rem;font-weight:600;display:block}
 .chips{display:flex;flex-wrap:wrap;gap:.35rem;padding:0;list-style:none}
 .chips li{background:var(--tint);color:var(--acc);padding:.2rem .65rem;border-radius:99px;font-size:.82rem}
 footer{padding:1rem 0 2rem;color:var(--mute);font-size:.85rem}
-#err{position:fixed;top:70px;left:10px;right:10px;z-index:99;background:#fee;color:#900;padding:10px;border:1px solid #900;font:13px monospace}
-
 @media(max-width:640px){.entry{grid-template-columns:1fr}#hl{display:none}}
-@media print{header,#stage,#hud,#hint,#cont,.fog,.tools{display:none!important}.js #cv{position:static;clip-path:none;visibility:visible;padding:0}.entry{break-inside:avoid}}
-@media(prefers-reduced-motion:reduce){.bd,.js #cv{transition:none}.pt b,#hint{animation:none}}
+@media print{header,#gl,#hud,#hint,#cont,.tools{display:none!important}#cv{position:static;clip-path:none;visibility:visible;padding:0}.entry{break-inside:avoid}}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 <header><div class="wrap">
-  <a class="brand" href="index.html#top">Prabin Karki</a>
+  <a class="brand" href="index.html#top">Prabin <span>Karki</span></a>
   <nav aria-label="Main navigation">
     <a href="index.html#about">About</a><a href="index.html#portfolio">Portfolio</a>
-    <a href="cv.html" aria-current="page">CV</a><a href="resources.html">Resources</a>
-    <a href="index.html#contact">Contact</a><a href="work_with_me.html">Work with me</a>
+    <a href="cv.html" class="on" aria-current="page">CV</a><a href="resources.html">Resources</a>
+    <a href="index.html#contact">Contact</a><a href="work_with_me.html" class="glow-button">Work with me ↗</a>
   </nav>
 </div></header>
 
 <div id="space"></div>
-<div id="stage"><div id="world"></div></div>
-<div class="fog"></div>
-<div id="hint">Scroll to walk the hall<br>Hover a year to turn and read it</div>
-<button class="b2" id="cont" type="button">Continue walking</button>
+<div id="hint">Entering the hall…<br>hover any year to read it</div>
+<button class="b2" id="cont" type="button">▶ Continue walking</button>
 <div id="hud">
-  <div id="hd"><b id="hy">Welcome</b><span id="hl">Entering the hall</span></div>
+  <div id="hd"><b id="hy">Welcome</b><span id="hl">Entering the hall…</span></div>
   <div id="bar"><i></i></div>
-  <button class="b2" id="auto" type="button">Auto-walk</button>
+  <button class="b2" id="auto" type="button">▶ Auto-walk</button>
   <button class="b2" id="skip" type="button">Skip to CV</button>
 </div>
 
@@ -178,316 +77,421 @@ footer{padding:1rem 0 2rem;color:var(--mute);font-size:.85rem}
     <li><a href="https://orcid.org/0000-0002-5884-1254" target="_blank" rel="noopener">ORCID 0000-0002-5884-1254</a></li></ul>
   <div class="tools"><a class="btn pri" href="Prabin_Karki_CV.pdf" download>Download PDF</a>
     <button class="btn" id="prt" type="button">Print</button>
-    <button class="btn" id="back" type="button">Back to corridor</button></div>
-  <div id="content"><noscript>This page needs JavaScript to display the CV.</noscript></div>
+    <button class="btn" id="back" type="button">↑ Back to corridor</button></div>
+  <div id="content"></div>
   <footer>© 2026 Prabin Karki. Kathmandu, Nepal.</footer>
 </div></main>
 
 <script>
-(function(){
-"use strict";
-var root=document.documentElement;
-function $(s){return document.querySelector(s)}
-function showError(msg){
-  var d=document.getElementById("err");
-  if(!d){d=document.createElement("div");d.id="err";document.body.appendChild(d)}
-  d.textContent="Script error: "+msg;
-}
-window.addEventListener("error",function(e){showError(e.message+" (line "+e.lineno+")")});
+addEventListener("error",e=>{const d=document.createElement("div");
+ d.style.cssText="position:fixed;top:70px;left:10px;right:10px;z-index:99;background:#fee;color:#900;padding:10px;border:1px solid #900;font:13px monospace";
+ d.textContent="Script error: "+e.message+" (line "+e.lineno+")";document.body.appendChild(d)});
 
-/* ================= CV DATA ================= */
-var D={
-profile:"Public health officer at the Epidemiology and Disease Control Division, Government of Nepal, with an MPH (Distinction) from Tribhuvan University. My research focuses on the health of older adults in Nepal, including the determinants of successful aging. I have co-authored four original research articles, am a named collaborator on four Global Burden of Disease publications, and serve as a peer reviewer for seven journals. I am seeking doctoral training in epidemiology.",
+/* ===== YOUR CV DATA ===== */
+const D={
 education:[
-["2022 – 2024","Master of Public Health (Distinction)","Central Department of Public Health, Institute of Medicine, Tribhuvan University"],
-["2015 – 2019","Bachelor in Public Health (First Division)","Maharajgunj Medical Campus, Institute of Medicine, Tribhuvan University"],
+["2022–2024","Master of Public Health (Distinction)","Central Department of Public Health, Institute of Medicine, Tribhuvan University"],
+["2015–2019","Bachelor in Public Health (First Division)","Maharajgunj Medical Campus, Institute of Medicine, Tribhuvan University"],
 ["2013","General Science, +2 (Distinction)","Morgan International College, HSEB"],
 ["2011","School Leaving Certificate (Distinction)","Sagarmatha Higher Secondary English Boarding School, Udayapur"]
 ],
 jobs:[
-{y:"Jan 2026 – Present",t:"Public Health Officer",o:"Epidemiology and Disease Control Division, Department of Health Services, Government of Nepal",b:[
-"Led the preparation of national documents: the M&E framework for epidemic management, water quality surveillance reference packages and the M&E checklist for health insurance.",
-"Contribute to drafting national policies, strategies, standards, protocols and guidelines on epidemiology, outbreak management and health emergency preparedness.",
+{y:"Jan 2026 - Present",t:"Public Health Officer",o:"Epidemiology and Disease Control Division, Department of Health Services, Government of Nepal",b:[
+"Led preparation of national documents: the M&E framework for epidemic management, water quality surveillance reference packages and the M&E checklist for health insurance.",
+"Support drafting of national policies, strategies, standards, protocols and guidelines on epidemiology, outbreak management and health emergency preparedness.",
 "Coordinate with federal, provincial, local and multi-sectoral authorities on epidemiological management, disaster response and annual work plans.",
-"Monitor and supervise surveillance, outbreak preparedness and disaster management programmes, providing timely feedback.",
+"Monitor and supervise surveillance, outbreak preparedness and disaster management programs, with timely feedback.",
 "Supported Mass Drug Administration (MDA) coverage surveys in Rautahat District, including field data collection and monitoring.",
-"Facilitated the five-day Rapid Response Team (RRT) training."]},
-{y:"Oct 2024 – Jan 2026",t:"Public Health Officer",o:"Ministry of Health, Bagmati Province",b:[
+"Facilitator for the five-day Rapid Response Team (RRT) training."]},
+{y:"Oct 2024 - Jan 2026",t:"Public Health Officer",o:"Ministry of Health, Bagmati Province",b:[
 "Contributed to provincial health policies and strategies, including the provincial population policy and health strategic framework.",
-"Monitored, supervised and evaluated public health programmes across provincial and local levels.",
+"Monitored, supervised and evaluated public health programs across provincial and local levels.",
 "Coordinated multi-sectoral work on immunisation, maternal and child health, adolescent health, disease prevention, nutrition and environmental health.",
-"Coordinated and evaluated programmes run by national and international NGOs in the province.",
-"Built a KoboToolbox reporting channel to track programme indicators and led the operation of GIOMS and HRRS.",
-"Prepared reports and the annual budget plan, and delivered staff trainings."]},
-{y:"Nov 2023 – Feb 2024",t:"Monitoring and Evaluation Officer (part-time)",o:"Creative Solution for Health Pvt Ltd",b:[
-"Conducted a baseline study of maternal and newborn health in Kalikot District.",
+"Coordinated and evaluated programs run by national and international NGOs in the province.",
+"Built a Kobo Toolbox reporting channel to track program indicators and led operation of GIOMS and HRRS.",
+"Documentation, reporting, annual budget plan, providing trainings, etc."]},
+{y:"Nov 2023 - Feb 2024",t:"Monitoring and Evaluation Officer (part-time)",o:"Creative Solution for Health Pvt Ltd",b:[
+"Baseline study of maternal and newborn health in Kalikot District.",
 "Monitored surveys and data quality, reviewing recorded interviews and giving daily feedback to enumerators and supervisors.",
 "Cleaned and analysed data in SPSS."]},
-{y:"Sep – Nov 2023",t:"Intern",o:"Nepal CRS Company",b:["Supported the M&E and programme teams on the Momentum Private Healthcare Delivery project, including field activities and monthly reports."]},
-{y:"Jun – Jul 2023",t:"Public Health Consultant (part-time)",o:"Budhanilkantha Municipality, Kathmandu",b:["Developed the municipality’s health contingency plan and held stakeholder meetings."]},
-{y:"Dec 2020 – Apr 2022",t:"Officer, Monitoring and Evaluation",o:"Karuna Foundation Nepal, Morang (Disability Prevention and Rehabilitation Program)",b:[
-"Supported the programme team in developing annual work plans aligned with programme activities.",
-"Led the implementation of the Management Information System (MIS) in the municipalities.",
+{y:"Sep - Nov 2023",t:"Intern",o:"Nepal CRS Company",b:["Supported M&E and program teams on the Momentum Private Healthcare Delivery project, including field activities and monthly reports."]},
+{y:"Jun - Jul 2023",t:"Public Health Consultant (part-time)",o:"Budhanilkantha Municipality, Kathmandu",b:["Developed the municipality’s health contingency plan and held stakeholder meetings."]},
+{y:"Dec 2020 - Apr 2022",t:"Officer, Monitoring and Evaluation",o:"Karuna Foundation Nepal, Morang",b:[
+"Disability Prevention and Rehabilitation Program (DPRP).",
+"Supported the program team in developing annual work plans aligned with program activities.",
+"Led implementation of the Management Information System (MIS) in the municipalities.",
 "Coordinated with provincial and central teams on baseline, mid-line and end-line surveys and led local data validation.",
-"Conducted field visits to review the implementation of M&E standards and provided technical backstopping.",
+"Conducted field visits to review implementation of M&E standards and provided technical backstopping.",
 "Ensured timely reporting to provincial and central offices and promoted the use of reporting tools and templates."]},
-{y:"Dec 2019 – Nov 2020",t:"Associate Officer, Programme (Lead M&E)",o:"Karuna Foundation Nepal, Sunsari",b:["Scaling Up WASH in Nepal: planned, monitored and reported on WASH, SRHR, health, nutrition, gender and livelihood activities."]},
-{y:"Jun – Dec 2019",t:"Monitoring and Evaluation Officer",o:"Global Action Nepal, Lamjung",b:["Sisters for Sisters’ Education programme: collected and validated district data and gave feedback.","Developed and implemented a monitoring plan and led technical M&E support."]},
-{y:"May 2019",t:"Field Researcher",o:"Partnership for Social Development",b:["Contributed to the end-line survey on maternal, neonatal and child health in Jajarkot District, covering quantitative and qualitative data collection and analysis."]},
-{y:"Apr – Aug 2018",t:"Intern",o:"Karuna Foundation Nepal, Rasuwa (Holistic Development Project)",b:["Ran workshops on inclusive and peer-to-peer education.","Assisted with health post construction follow-up, menstrual health management, SRHR and early childhood development."]}
+{y:"Dec 2019 - Nov 2020",t:"Associate Officer, Program (Lead M&E)",o:"Karuna Foundation Nepal, Sunsari",b:["Scaling up WASH in Nepal: planned, monitored and reported on WASH, SRHR, health, nutrition, gender and livelihood activities."]},
+{y:"Jun - Dec 2019",t:"Monitoring and Evaluation Officer",o:"Global Action Nepal, Lamjung",b:["Sister for Sisters’ Education: collected and validated district data and gave feedback.","Developed and implemented a monitoring plan and led technical M&E support."]},
+{y:"May 2019",t:"Field Researcher",o:"Partnership for Social Development",b:["End-line survey on maternal, neonatal and child health in Jajarkot District: quantitative and qualitative data collection and analysis."]},
+{y:"Apr - Aug 2018",t:"Intern",o:"Karuna Foundation Nepal, Rasuwa",b:["Holistic Development Project: ran workshops on inclusive and peer-to-peer education.","Assisted with health post construction follow-up, menstrual health management, SRHR and early childhood development."]}
 ],
-original:[
-{a:"Karki P, Sapkota KP, Pradhan PMS, Suvedi BK, Bhurtyal A",t:"Successful aging and its associated factors among older adults in Nepal: a cross-sectional study",j:"BMC Geriatrics",v:"2025;25:657",doi:"10.1186/s12877-025-06335-4"},
-{a:"Gaire M, Gautam L, Karki P, Poudel L, Khanal S",t:"Dating violence prevalence and factors associated among undergraduate public health students of Kathmandu metropolitan city, Nepal: a cross-sectional study",j:"BMJ Open",v:"2024;14:e081516",doi:"10.1136/bmjopen-2023-081516"},
-{a:"Karki P, Shahi PV, Sapkota KP, Bhandari R, Adhikari N, Shrestha B",t:"Depressive symptoms and associated factors among persons with physical disabilities in disability care homes of Kathmandu district, Nepal: a mixed method study",j:"PLOS Global Public Health",v:"2023;3(1):e0001461",doi:"10.1371/journal.pgph.0001461"},
-{a:"Bucha B, Karki P, Singh PM",t:"Nutritional status of under five children and its associated factors in urban slums of Kathmandu Valley, Nepal",j:"One Health Journal of Nepal",v:"2023;3(5):11–17",doi:""}
-],
-gbd:[
-{a:"GBD 2021 Diarrhoeal Diseases Collaborators",t:"Global, regional, and national age-sex-specific burden of diarrhoeal diseases, their risk factors, and aetiologies, 1990–2021, for 204 countries and territories",j:"The Lancet Infectious Diseases",v:"2025",doi:"10.1016/S1473-3099(24)00691-1"},
-{a:"GBD 2021 Smoking Collaborators",t:"Forecasting the effects of smoking prevalence scenarios on years of life lost and life expectancy from 2022 to 2050",j:"The Lancet Public Health",v:"2024",doi:"10.1016/S2468-2667(24)00166-X"},
-{a:"GBD 2021 Stroke Collaborators",t:"Global, regional, and national burden of stroke and its risk factors, 1990–2021",j:"The Lancet Neurology",v:"2024",doi:"10.1016/S1474-4422(24)00369-7"},
-{a:"GBD 2022 Cardiovascular Disease Collaborators",t:"Global burden of cardiovascular diseases and risks, 1990–2022",j:"Journal of the American College of Cardiology",v:"2023",doi:"10.1016/j.jacc.2023.11.007"}
+pubs:[
+["original","Karki P, Sapkota KP, Pradhan PMS, Suvedi BK, Bhurtyal A. Successful aging and its associated factors among older adults in Nepal: a cross-sectional study. <em>BMC Geriatrics</em>. 2025;25:657.","10.1186/s12877-025-06335-4"],
+["original","Karki P, Shahi PV, Sapkota KP, Bhandari R, Adhikari N, Shrestha B. Depressive symptoms and associated factors among persons with physical disabilities in disability care homes of Kathmandu district, Nepal: a mixed method study. <em>PLOS Global Public Health</em>. 2023;3(1):e0001461.","10.1371/journal.pgph.0001461"],
+["original","Gaire M, Gautam L, Karki P, Poudel L, Khanal S. Dating violence prevalence and factors associated among undergraduate public health students of Kathmandu metropolitan city, Nepal: a cross-sectional study. <em>BMJ Open</em>. 2024;14:e081516.","10.1136/bmjopen-2023-081516"],
+["original","Bucha B, Karki P, Singh PM. Nutritional status of under five children and its associated factors in urban slums of Kathmandu Valley, Nepal. <em>One Health Journal of Nepal</em>. 2023;3(5):11–17.",""],
+["gbd","GBD 2021 Diarrhoeal Diseases Collaborators. Global, regional, and national age-sex-specific burden of diarrhoeal diseases, their risk factors, and aetiologies, 1990–2021, for 204 countries and territories. <em>The Lancet Infectious Diseases</em>. 2025.","10.1016/S1473-3099(24)00691-1"],
+["gbd","GBD 2021 Smoking Collaborators. Forecasting the effects of smoking prevalence scenarios on years of life lost and life expectancy from 2022 to 2050. <em>The Lancet Public Health</em>. 2024.","10.1016/S2468-2667(24)00166-X"],
+["gbd","GBD 2021 Stroke Collaborators. Global, regional, and national burden of stroke and its risk factors, 1990–2021. <em>The Lancet Neurology</em>. 2024.","10.1016/S1474-4422(24)00369-7"],
+["gbd","GBD 2022 Cardiovascular Disease Collaborators. Global burden of cardiovascular diseases and risks, 1990–2022. <em>Journal of the American College of Cardiology</em>. 2023.","10.1016/j.jacc.2023.11.007"],
+["review","Undiagnosed hypertension and its associated factors: a cross-sectional study among adults in a rural municipality of Nepal.",""],
+["review","Depressive symptoms and suicidal attempts in sexual and gender minorities and heterosexual cisgender people of Nepal: a mixed-methods study.",""],
+["review","Parent-adolescent communication on sexual and reproductive health and its associated factors in Jhapa, Nepal: a cross-sectional study.",""],
+["review","Determinants of successful aging in Western Nepal: a cross-sectional study (in preparation).",""]
 ],
 review:[
-"Undiagnosed hypertension and its associated factors: a cross-sectional study among adults in a rural municipality of Nepal.",
-"Depressive symptoms and suicidal attempts in sexual and gender minorities and heterosexual cisgender people of Nepal: a mixed-methods study.",
-"Parent-adolescent communication on sexual and reproductive health and its associated factors in Jhapa, Nepal: a cross-sectional study."
-],
-prep:["Determinants of successful aging in Western Nepal: a cross-sectional study."],
-peer:[
-["4 articles","INQUIRY: The Journal of Health Care Organization, Provision, and Financing"],
-["2 articles","BMC Geriatrics"],["2 articles","PLOS Global Public Health"],
-["1 article","Journal of Nepal Medical Association (JNMA)"],["1 article","BJPsych International"],
-["1 article","BMC Psychology"],["1 article","Discover Public Health"]
+["INQUIRY: The Journal of Health Care Organization, Provision, and Financing","4 articles"],
+["BMC Geriatrics","2 articles"],["PLOS Global Public Health","2 articles"],
+["Journal of Nepal Medical Association (JNMA)","1 article"],["BJPsych International","1 article"],
+["BMC Psychology","1 article"],["Discover Public Health","1 article"],["GBD Senior Collaborator","Named collaborator"]
 ],
 awards:[
-["2026 – Present","Data Fellowship","Code for Nepal with DataCamp and TechPana (R for Data Scientists)"],
+["2026 to present","Data Fellowship","Code for Nepal with DataCamp and TechPana (R for Data Scientists)"],
 ["2023","Sigma Xi Grants-in-Aid of Research","Principal Investigator"],
 ["2023","DsAcademy Seed Grant","Principal Investigator"],
-["2022 – 2024","Postgraduate Scholarship (fully funded)","Medical Education Commission, Government of Nepal, for the MPH"],
+["2022–2024","Postgraduate Scholarship (fully funded)","Medical Education Commission, Government of Nepal, for the MPH"],
 ["2019","Poster Presentation, Bronze Medal","National Young Scientist Conference 2019, RECAST"]
 ],
 training:[
-["2026","Training of Trainers, Rapid Response Team (RRT)",""],
-["2026","Training of Trainers, Community Based Surveillance Program (SORMAS)",""],
+["2026","ToT, Rapid Response Team (RRT) Training",""],
+["2026","ToT, Community Based Surveillance Program (SORMAS)",""],
 ["2022","Research Data Analysis with R","30 hours, online"],
 ["2020","DHIS2 Training","Provincial Health Directorate, Koshi Province"],
 ["2019","Advanced Excel Training","Mentor Institute of Technologies"],
 ["2018","Conference on Accelerating the Implementation of ICPD","IYAFP-Nepal"]
 ],
 volunteer:[
-["2016 – 2017","Visible Impact Nepal","No Shame To Bleed campaign: helped develop a menstrual health management manual and ran school workshops"],
-["2015","2015 Gorkha earthquake response","Volunteered in disaster management"]
+["2016–2017","Visible Impact Nepal","No Shame To Bleed campaign: helped develop a menstrual health management manual and ran school workshops"],
+["2015","Earthquake response","Volunteered in disaster management"],
+["Member","Physicians for Social Responsibility Nepal, Nepal Public Health Students’ Society, International Youth Alliance for Family Planning",""]
 ],
-members:["Physicians for Social Responsibility Nepal","Nepal Public Health Students’ Society","International Youth Alliance for Family Planning"],
-skills:["R","SPSS","EpiData","DHIS2","KoboToolbox","Advanced Excel","MS Access","EndNote","Zotero"]
+skills:["R","SPSS","Epidata","DHIS2","Kobo Toolbox","Advanced Excel","MS Access","EndNote","Zotero","Nepali typing","Driving License Two & Four wheeler"]
 };
 
-/* ================= helpers ================= */
-function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
-function yr(s){var m=String(s).match(/\d{4}/);return m?m[0]:""}
-function clip(t,n){return t.length>n?t.slice(0,n-1)+"…":t}
-function sm(t){return t*t*(3-2*t)}
-function cl(v,a,b){a=a===undefined?0:a;b=b===undefined?1:b;return Math.min(b,Math.max(a,v))}
+const $=s=>document.querySelector(s);
+const yr=s=>(String(s).match(/\d{4}/)||[""])[0];
+const clip=(t,n)=>t.length>n?t.slice(0,n-1)+"…":t;
+const strip=h=>h.replace(/<[^>]+>/g,"");
+const cl=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),sm=t=>t*t*(3-2*t);
 
-/* ================= 1. full CV (rendered first, so it always works) ================= */
-function rows(a){return a.map(function(x){
-  return '<div class="entry"><div class="when">'+esc(x[0])+'</div><div><h3>'+esc(x[1])+'</h3>'+(x[2]?'<span class="org">'+esc(x[2])+'</span>':"")+'</div></div>'}).join("")}
-function cite(p){
-  var a=esc(p.a).replace("Karki P","<strong>Karki P</strong>");
-  return a+". "+esc(p.t)+". <em>"+esc(p.j)+"</em>. "+esc(p.v)+"."+(p.doi?' <a href="https://doi.org/'+p.doi+'" target="_blank" rel="noopener">doi:'+p.doi+'</a>':"");
+/* ---------- full CV overlay (always built, so the page works even without WebGL) ---------- */
+const rows=a=>a.map(x=>`<div class="entry"><div class="when">${x[0]}</div><div><h3>${x[1]}</h3>${x[2]?`<span class="org">${x[2]}</span>`:""}</div></div>`).join("");
+const TAGS={original:"Original research",gbd:"GBD collaboration",review:"In review or in preparation"};
+const SEC=[["Education",()=>rows(D.education)],
+["Experience",()=>D.jobs.map(j=>`<div class="entry"><div class="when">${j.y}</div><div><h3>${j.t}</h3><span class="org">${j.o}</span><ul>${j.b.map(b=>`<li>${b}</li>`).join("")}</ul></div></div>`).join("")],
+["Publications",()=>D.pubs.map(p=>`<div class="entry pub"><span class="tag">${TAGS[p[0]]}</span>${p[1].replace("Karki P","<strong>Karki P</strong>")}${p[2]?` <a href="https://doi.org/${p[2]}" target="_blank" rel="noopener">doi:${p[2]}</a>`:""}</div>`).join("")],
+["Peer review",()=>rows(D.review.map(r=>[r[1],r[0],""]))],["Grants and awards",()=>rows(D.awards)],
+["Trainings",()=>rows(D.training)],["Volunteering",()=>rows(D.volunteer)],
+["Skills",()=>`<ul class="chips">${D.skills.map(s=>`<li>${s}</li>`).join("")}</ul>`]];
+$("#content").innerHTML=SEC.map(s=>`<section class="sec"><h2>${s[0]}</h2>${s[1]()}</section>`).join("");
+$("#prt").onclick=()=>print();
+const cv=$("#cv");
+
+if(typeof THREE==="undefined"){
+  /* Three.js could not load (offline / blocked): show the normal CV instead of a blank page */
+  cv.classList.add("open");cv.style.transition="none";$("#back").style.display="none";
+  $("#hud").style.display=$("#hint").style.display="none";
+}else{
+
+/* ---------- 1. milestones, oldest first, alternating walls ---------- */
+const M=[];
+D.education.slice().reverse().forEach(e=>M.push({y:yr(e[0]),k:"Education",t:e[1],s:e[2],w:e[0],d:[]}));
+D.jobs.slice().reverse().forEach(j=>M.push({y:yr(j.y),k:"Role",t:j.t,s:j.o,w:j.y,d:j.b}));
+D.awards.slice().reverse().forEach(a=>M.push({y:yr(a[0]),k:"Award",t:a[1],s:a[2],w:a[0],d:[]}));
+D.pubs.filter(p=>p[0]==="original").forEach(p=>{
+  const c=strip(p[1]),q=c.split(". "),j=(p[1].match(/<em>(.*?)<\/em>/)||["",""])[1],y=(c.match(/\b(20\d\d)\b/)||["",""])[1];
+  M.push({y,k:"Publication",t:q[1]||c,s:(j?j+" · ":"")+y,w:"",d:["Authors: "+q[0]]})});
+M.sort((a,b)=>a.y-b.y);
+M.forEach((m,i)=>m.side=i%2?1:-1);          // -1 = left wall, +1 = right wall
+const n=M.length;
+
+/* ---------- 2. the hall's S-shaped path (units ≈ metres) ---------- */
+const W=8,H=5,EYE=1.7,STEP=.5,AL=.75,RR=48;
+const DOOR=14,START=30,GAP=13,L=START+n*GAP+30,MAXD=L-10,S0=3,PXU=14,AUTOV=5;
+const SS=M.map((_,i)=>START+i*GAP);
+const hd=s=>AL*Math.sin(s/RR);
+const PX=[0],PZ=[0];
+for(let i=1;i<=Math.ceil(L/STEP)+60;i++){const h=hd((i-.5)*STEP);PX[i]=PX[i-1]+Math.sin(h)*STEP;PZ[i]=PZ[i-1]-Math.cos(h)*STEP}
+const at=s=>{const f=Math.max(0,s)/STEP,i=Math.floor(f),t=f-i;return[PX[i]+(PX[i+1]-PX[i])*t,PZ[i]+(PZ[i+1]-PZ[i])*t,hd(s)]};
+
+/* ---------- 3. renderer ---------- */
+let renderer;
+try{renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:"high-performance"})}
+catch(e){cv.classList.add("open");cv.style.transition="none";$("#back").style.display="none";$("#hud").style.display=$("#hint").style.display="none";throw e}
+renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.75));
+renderer.domElement.id="gl";document.body.appendChild(renderer.domElement);
+const scene=new THREE.Scene(),BG=0xf4f7f7;
+scene.background=new THREE.Color(BG);scene.fog=new THREE.Fog(BG,16,62);
+const cam=new THREE.PerspectiveCamera(55,1,.1,140);
+scene.add(new THREE.HemisphereLight(0xffffff,0xdfe8e8,.95),new THREE.AmbientLight(0xffffff,.45));
+const lamp=new THREE.PointLight(0xfff1d6,.55,24,1.5);scene.add(lamp);
+const aniso=renderer.capabilities.getMaxAnisotropy();
+
+/* ---------- 4. textures (canvas) ---------- */
+const mkc=(w,h)=>{const c=document.createElement("canvas");c.width=w;c.height=h;return c};
+const mkt=(c,rep)=>{const t=new THREE.CanvasTexture(c);t.anisotropy=aniso;if(rep)t.wrapS=THREE.RepeatWrapping;return t};
+function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
+function lines(c,t,mw){const ws=String(t).split(" "),o=[];let l="";for(const w of ws){const s=l?l+" "+w:w;if(c.measureText(s).width>mw&&l){o.push(l);l=w}else l=s}if(l)o.push(l);return o}
+function para(c,t,x,y,mw,lh,maxY,maxL=99){const A=lines(c,t,mw);let k=0;
+  for(;k<A.length&&k<maxL&&y<=maxY;k++){let s=A[k];const more=k<A.length-1;if(more&&(k===maxL-1||y+lh>maxY))s=s.replace(/\s*\S+$/,"")+"…";c.fillText(s,x,y);y+=lh}return y}
+
+const floorC=mkc(512,512);{const c=floorC.getContext("2d");
+  c.fillStyle="#eef1f1";c.fillRect(0,0,512,512);
+  c.strokeStyle="#d3dada";c.lineWidth=2;for(let i=0;i<=512;i+=64){c.beginPath();c.moveTo(i,0);c.lineTo(i,512);c.stroke();c.beginPath();c.moveTo(0,i);c.lineTo(512,i);c.stroke()}
+  c.fillStyle="#dbe8e8";c.fillRect(0,172,512,168);
+  for(const x of[28,284]){rr(c,x,196,200,120,28);c.fillStyle="#0f7079";c.fill();c.lineWidth=6;c.strokeStyle="#d79a2e";c.stroke()}
+  c.fillStyle="#d79a2e";for(let x=16;x<512;x+=32){c.beginPath();c.arc(x,166,4,0,7);c.fill();c.beginPath();c.arc(x,346,4,0,7);c.fill()}}
+const wallC=mkc(512,512);{const c=wallC.getContext("2d");
+  const g=c.createLinearGradient(0,0,0,512);g.addColorStop(0,"#ffffff");g.addColorStop(.66,"#f7f9f9");c.fillStyle=g;c.fillRect(0,0,512,512);
+  c.fillStyle="#edf1f1";c.fillRect(0,338,512,174);c.fillStyle="#d79a2e";c.fillRect(0,334,512,7);
+  c.fillStyle="#b6c3c3";c.fillRect(0,488,512,24);
+  c.strokeStyle="#d9e2e2";c.lineWidth=3;rr(c,28,364,456,100,6);c.stroke();
+  c.fillStyle="#dfe7e7";c.fillRect(0,0,5,512)}
+const ceilC=mkc(512,512);{const c=ceilC.getContext("2d");
+  c.fillStyle="#f8fafa";c.fillRect(0,0,512,512);
+  c.shadowColor="rgba(255,225,160,.9)";c.shadowBlur=40;c.fillStyle="#fffdf1";rr(c,150,186,212,140,18);c.fill();c.shadowBlur=0;
+  c.strokeStyle="#e4eaea";c.lineWidth=4;c.strokeRect(0,0,512,512)}
+const mFloor=new THREE.MeshLambertMaterial({map:mkt(floorC,1),side:THREE.DoubleSide});
+const mWall =new THREE.MeshLambertMaterial({map:mkt(wallC,1), side:THREE.DoubleSide});
+const mCeil =new THREE.MeshBasicMaterial({map:mkt(ceilC,1)});
+const mWhite=new THREE.MeshLambertMaterial({color:0xffffff}),mTint=new THREE.MeshLambertMaterial({color:0xeaf1f1}),mGold=new THREE.MeshLambertMaterial({color:0xd79a2e});
+
+/* ---------- 5. continuous corridor mesh ---------- */
+function ribbon(oa,ya,ob,yb,mat,rep=8){
+  const pos=[],uv=[],idx=[],N=Math.round(L);
+  for(let k=0;k<=N;k++){
+    const s=L*k/N,p=at(s),rx=Math.cos(p[2]),rz=Math.sin(p[2]);
+    pos.push(p[0]+rx*oa,ya,p[1]+rz*oa,p[0]+rx*ob,yb,p[1]+rz*ob);
+    uv.push(s/rep,0,s/rep,1);
+    if(k<N){const a=k*2;idx.push(a,a+1,a+2,a+1,a+3,a+2)}
+  }
+  const g=new THREE.BufferGeometry();
+  g.setAttribute("position",new THREE.Float32BufferAttribute(pos,3));
+  g.setAttribute("uv",new THREE.Float32BufferAttribute(uv,2));
+  g.setIndex(idx);g.computeVertexNormals();
+  const m=new THREE.Mesh(g,mat);m.frustumCulled=false;scene.add(m);return m;
 }
-function ol(items){return '<ol class="pubs">'+items.map(function(x){return "<li>"+x+"</li>"}).join("")+"</ol>"}
-var SEC=[
-["Research profile",function(){return '<p class="profile">'+esc(D.profile)+"</p>"}],
-["Education",function(){return rows(D.education)}],
-["Publications",function(){
-  return '<p class="pubgroup">Original research</p>'+ol(D.original.map(cite))+
-   '<p class="pubgroup">Global Burden of Disease collaborations (named collaborator)</p>'+ol(D.gbd.map(cite))+
-   '<p class="pubgroup">Under review</p>'+ol(D.review.map(esc))+
-   '<p class="pubgroup">In preparation</p>'+ol(D.prep.map(esc))}],
-["Peer review",function(){return rows(D.peer.map(function(r){return [r[0],r[1],""]}))}],
-["Experience",function(){return D.jobs.map(function(j){
-  return '<div class="entry"><div class="when">'+esc(j.y)+'</div><div><h3>'+esc(j.t)+'</h3><span class="org">'+esc(j.o)+'</span><ul>'+j.b.map(function(b){return "<li>"+esc(b)+"</li>"}).join("")+"</ul></div></div>"}).join("")}],
-["Grants and awards",function(){return rows(D.awards)}],
-["Training",function(){return rows(D.training)}],
-["Volunteering",function(){return rows(D.volunteer)}],
-["Professional memberships",function(){return '<ul class="chips">'+D.members.map(function(s){return "<li>"+esc(s)+"</li>"}).join("")+"</ul>"}],
-["Skills",function(){return '<ul class="chips">'+D.skills.map(function(s){return "<li>"+esc(s)+"</li>"}).join("")+"</ul>"}]
-];
-$("#content").innerHTML=SEC.map(function(s){return '<section class="sec"><h2>'+s[0]+"</h2>"+s[1]()+"</section>"}).join("");
-$("#prt").onclick=function(){window.print()};
+ribbon(-W/2,0,W/2,0,mFloor);
+ribbon(-W/2,H,W/2,H,mCeil);
+ribbon(-W/2,0,-W/2,H,mWall);
+ribbon( W/2,0, W/2,H,mWall);
+const place=(o,s)=>{const p=at(s);o.position.set(p[0],0,p[1]);o.rotation.y=-p[2];scene.add(o);return o};
+{const back=new THREE.Mesh(new THREE.PlaneGeometry(W,H),mWall);back.position.set(0,H/2,0);back.rotation.y=Math.PI;
+ const g=new THREE.Group();g.add(back);place(g,0)}
+{const c=mkc(1024,640),x=c.getContext("2d");
+ const gr=x.createRadialGradient(512,320,20,512,320,520);gr.addColorStop(0,"#fff");gr.addColorStop(.5,"#fff6df");gr.addColorStop(1,"#f6dca6");x.fillStyle=gr;x.fillRect(0,0,1024,640);
+ x.textAlign="center";x.fillStyle="#c8821a";x.font="700 80px Georgia,serif";x.fillText("Your full CV",512,300);x.fillStyle="#0b5d63";x.font="600 44px system-ui,sans-serif";x.fillText("unrolls next  ↓",512,380);
+ const m=new THREE.Mesh(new THREE.PlaneGeometry(W,H),new THREE.MeshBasicMaterial({map:mkt(c)}));m.position.set(0,H/2,0);
+ const g=new THREE.Group();g.add(m);place(g,L-1)}
 
-/* ================= 2. the 3D corridor ================= */
-function buildCorridor(){
-  var body=document.body;
-  /* milestones, oldest first, alternating walls */
-  var M=[];
-  D.education.slice().reverse().forEach(function(e){M.push({y:yr(e[0]),k:"Education",t:e[1],s:e[2],w:e[0],d:[]})});
-  D.jobs.slice().reverse().forEach(function(j){M.push({y:yr(j.y),k:"Role",t:j.t,s:j.o,w:j.y,d:j.b.slice(0,3)})});
-  D.awards.slice().reverse().forEach(function(a){M.push({y:yr(a[0]),k:"Award",t:a[1],s:a[2],w:a[0],d:[]})});
-  D.original.forEach(function(p){M.push({y:yr(p.v),k:"Publication",t:p.t,s:p.j,w:"",d:["Authors: "+p.a]})});
-  M.sort(function(a,b){return a.y-b.y});
-  M.forEach(function(m,i){m.side=i%2?1:-1});
+/* ---------- 6. hall entry: rug, arch, double doors ---------- */
+{const c=mkc(1024,512),x=c.getContext("2d");
+ rr(x,10,10,1004,492,40);x.fillStyle="#0f7079";x.fill();x.lineWidth=10;x.strokeStyle="#f0c36b";x.stroke();
+ x.strokeStyle="#0b5d63";x.lineWidth=6;rr(x,40,40,944,432,28);x.stroke();
+ x.textAlign="center";x.fillStyle="#fff";x.font="700 130px Georgia,serif";x.fillText("Welcome",512,270);
+ x.fillStyle="#f0c36b";x.font="600 38px system-ui,sans-serif";x.fillText("PRABIN KARKI  ·  CURRICULUM VITAE",512,350);
+ const m=new THREE.Mesh(new THREE.PlaneGeometry(4.6,2.3),new THREE.MeshBasicMaterial({map:mkt(c),polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2}));
+ m.rotation.x=-Math.PI/2;m.position.y=.02;const g=new THREE.Group();g.add(m);place(g,DOOR-8)}
+const doorG=new THREE.Group();
+const leaf=sg=>{const piv=new THREE.Group();piv.position.set(sg*W/2,0,0);
+  const lw=W/2-.03,cx=-sg*lw/2;
+  const a=new THREE.Mesh(new THREE.BoxGeometry(lw,4.3,.16),mWhite);a.position.set(cx,2.15,0);
+  const b=new THREE.Mesh(new THREE.BoxGeometry(lw-.55,3.7,.19),mGold);b.position.set(cx,2.2,0);
+  const d=new THREE.Mesh(new THREE.BoxGeometry(lw-.8,3.45,.21),mTint);d.position.set(cx,2.2,0);
+  const h=new THREE.Mesh(new THREE.BoxGeometry(.12,.8,.14),mGold);h.position.set(-sg*(lw-.35),2.1,.2);
+  piv.add(a,b,d,h);doorG.add(piv);return piv};
+const doorL=leaf(-1),doorR=leaf(1);
+{const hdr=new THREE.Mesh(new THREE.BoxGeometry(W,H-4.3,.3),mWhite);hdr.position.set(0,(4.3+H)/2,0);doorG.add(hdr);
+ const c=mkc(1600,170),x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,1600,170);x.fillStyle="#d79a2e";x.fillRect(0,150,1600,20);
+ x.textAlign="center";x.fillStyle="#0b5d63";x.font="700 30px system-ui,sans-serif";x.fillText("T H E   C A R E E R   H A L L   ·   2 0 1 1  →  2 0 2 6",800,56);
+ x.fillStyle="#12262e";x.font="700 66px Georgia,serif";x.fillText("Prabin Karki",800,128);
+ const s=new THREE.Mesh(new THREE.PlaneGeometry(W,.7),new THREE.MeshBasicMaterial({map:mkt(c)}));s.position.set(0,(4.3+H)/2,.16);doorG.add(s)}
+place(doorG,DOOR);
 
-  var SEG=400,START=900,GAP=520,DOOR=480,n=M.length;
-  var L=START+n*GAP+800,POSMAX=L-500,KS=215,AUTOV=260;
-  var SS=M.map(function(_,i){return START+i*GAP});
+/* ---------- 7. milestones: tile + board on the wall, plaque on the floor ---------- */
+const portraitNow=()=>innerWidth<innerHeight*.9;
+let BW=5.6,BH=4,CW=1400,CH=1000;
+function tileCanvas(m){
+  const c=mkc(640,480),x=c.getContext("2d");
+  x.shadowColor="rgba(11,93,99,.28)";x.shadowBlur=26;x.shadowOffsetY=8;x.fillStyle="#fff";rr(x,22,16,596,430,22);x.fill();x.shadowColor="transparent";
+  x.save();rr(x,22,16,596,430,22);x.clip();x.fillStyle="#d79a2e";x.fillRect(22,16,596,14);x.restore();
+  x.textAlign="left";x.fillStyle="#c8821a";x.font="700 124px Georgia,serif";x.fillText(m.y,50,162);
+  x.fillStyle="#0b5d63";x.font="700 24px system-ui,sans-serif";x.fillText(m.k.toUpperCase(),54,208);
+  let y=244;if(m.w&&m.w!==m.y){x.fillStyle="#12262e";x.font="600 28px system-ui,sans-serif";x.fillText(m.w,54,y);y+=44}
+  x.fillStyle="#12262e";x.font="700 38px Georgia,serif";para(x,m.t,54,y+8,540,46,392,3);
+  x.fillStyle="#c8821a";x.font="700 22px system-ui,sans-serif";x.textAlign="right";x.fillText("HOVER TO READ ▸",596,430);
+  return c}
+function boardCanvas(m,i){
+  const c=mkc(CW,CH),x=c.getContext("2d"),P=CW<CH;
+  x.shadowColor="rgba(11,93,99,.3)";x.shadowBlur=34;x.shadowOffsetY=10;x.fillStyle="#fff";rr(x,34,26,CW-68,CH-60,30);x.fill();x.shadowColor="transparent";
+  x.save();rr(x,34,26,CW-68,CH-60,30);x.clip();
+  x.fillStyle="#d79a2e";x.fillRect(34,26,CW-68,18);
+  const g=x.createLinearGradient(0,44,0,250);g.addColorStop(0,"#e9f4f4");g.addColorStop(1,"#fff");x.fillStyle=g;x.fillRect(34,44,CW-68,206);x.restore();
+  x.textAlign="left";x.fillStyle="#c8821a";x.font="700 170px Georgia,serif";x.fillText(m.y,80,200);
+  const yw=x.measureText(m.y).width,hx=P?80:80+yw+50,hy=P?250:112;
+  x.fillStyle="#0b5d63";x.font="700 30px system-ui,sans-serif";x.fillText(m.k.toUpperCase(),hx,hy-(P?0:0));
+  if(m.w&&m.w!==m.y){x.fillStyle="#12262e";x.font="700 40px system-ui,sans-serif";x.fillText(m.w,hx,hy+54)}
+  x.textAlign="right";x.fillStyle="#7a8d93";x.font="600 28px system-ui,sans-serif";x.fillText(String(i+1).padStart(2,"0")+" / "+n,CW-80,92);
+  x.textAlign="left";x.strokeStyle="#dbe3e2";x.lineWidth=3;x.beginPath();x.moveTo(80,P?290:268);x.lineTo(CW-80,P?290:268);x.stroke();
+  const mw=CW-160;let y=(P?290:268)+78;
+  x.fillStyle="#12262e";x.font="700 56px Georgia,serif";y=para(x,m.t,80,y,mw,64,CH-80,3);
+  if(m.s){x.fillStyle="#0b5d63";x.font="600 31px system-ui,sans-serif";y=para(x,m.s,80,y+6,mw,42,CH-70,2)}
+  y+=14;x.fillStyle="#33464d";x.font="400 30px system-ui,sans-serif";
+  for(const b of m.d){if(y>CH-90)break;x.fillStyle="#c8821a";x.fillText("•",80,y);x.fillStyle="#33464d";y=para(x,b,116,y,mw-36,41,CH-70,3)+10}
+  return c}
+function plaqueCanvas(m){const c=mkc(512,256),x=c.getContext("2d");
+  rr(x,8,8,496,240,34);x.fillStyle="#fff";x.fill();x.lineWidth=10;x.strokeStyle="#d79a2e";x.stroke();
+  x.textAlign="center";x.fillStyle="#c8821a";x.font="700 150px Georgia,serif";x.fillText(m.y,256,176);return c}
 
-  var world=$("#world"),objs=[],msE=[],pqE=[],bdE=[];
-  function mk(cls,tf,html,s){
-    var e=document.createElement("div");
-    e.className="o "+cls;e.style.transform=tf;e.innerHTML=html||"";
-    world.appendChild(e);objs.push({e:e,s:s,v:true});return e;
-  }
+const tiles=[],boards=[],plaques=[],groups=[];
+M.forEach((m,i)=>{
+  const s=SS[i],g=new THREE.Group();place(g,s);groups.push(g);
+  const tm=new THREE.Mesh(new THREE.PlaneGeometry(3.2,2.4),new THREE.MeshBasicMaterial({map:mkt(tileCanvas(m)),transparent:true,depthWrite:false}));
+  tm.position.set(m.side*(W/2-.03),2.6,0);tm.rotation.y=-m.side*Math.PI/2;tm.renderOrder=2;tm.userData.i=i;g.add(tm);tiles.push(tm);
+  const bm=new THREE.Mesh(new THREE.PlaneGeometry(BW,BH),new THREE.MeshBasicMaterial({transparent:true,opacity:0,depthWrite:false}));
+  bm.position.set(m.side*(W/2-.06),2.5,0);bm.rotation.y=-m.side*Math.PI/2;bm.renderOrder=3;bm.visible=false;g.add(bm);boards.push(bm);
+  const pm=new THREE.Mesh(new THREE.PlaneGeometry(2.4,1.2),new THREE.MeshBasicMaterial({map:mkt(plaqueCanvas(m)),transparent:true,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2}));
+  pm.rotation.x=-Math.PI/2;pm.position.y=.025;g.add(pm);plaques.push(pm);
+});
 
-  /* corridor sections */
-  var segHtml='<i class="fl"><b class="rn"></b></i><i class="cl"><b class="lt" style="top:60px"></b><b class="lt" style="top:260px"></b></i><i class="wl l"></i><i class="wl r"></i>';
-  for(var i=0;i*SEG<=L+SEG;i++){mk("g","translate3d(0,0,"+(-i*SEG)+"px)",segHtml,i*SEG+SEG/2)}
+/* golden dust */
+const NP=170,dp=new Float32Array(NP*3),dbase=[];
+for(let i=0;i<NP;i++){const s=Math.random()*L,p=at(s),lat=(Math.random()-.5)*(W-1),y=.4+Math.random()*(H-.8);
+  dp[i*3]=p[0]+Math.cos(p[2])*lat;dp[i*3+1]=y;dp[i*3+2]=p[1]+Math.sin(p[2])*lat;dbase.push([y,Math.random()*6.28])}
+const dg=new THREE.BufferGeometry();dg.setAttribute("position",new THREE.BufferAttribute(dp,3));
+scene.add(new THREE.Points(dg,new THREE.PointsMaterial({color:0xd79a2e,size:.09,transparent:true,opacity:.8,depthWrite:false})));
 
-  /* rug, arch and double doors */
-  mk("rug","translate3d(0,165px,-260px) rotateX(90deg)","<div><span>Welcome<small>Prabin Karki</small></span></div>",260);
-  var door=mk("door","translate3d(0,0,"+(-DOOR)+"px)",'<div class="arch"><small>The career hall, 2011–2026</small><b>Prabin Karki</b></div><div class="dlf L"></div><div class="dlf R"></div>',DOOR);
-  var doorL=door.querySelector(".L"),doorR=door.querySelector(".R");
+/* ---------- 8. state ---------- */
+const hint=$("#hint"),hy=$("#hy"),hl=$("#hl"),bar=$("#bar i"),btn=$("#auto"),space=$("#space");
+const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+const maxScroll=(MAXD-S0)*PXU;
+let sc=S0,open=false,auto=false,posA=0,lastSet=0,last=0,lastNear=-9;
+let fi=-1,fidx=0,fw=0,dist=5,coolUntil=0,dwell=null,missT=0,fpt=[0,0];
+const mouse=new THREE.Vector2(),ray=new THREE.Raycaster();
+let mx=0,my=0;
 
-  /* milestones: tile + board on the wall, light patch, year on the floor */
-  M.forEach(function(m,i){
-    var s=SS[i],side=m.side;
-    var lines=m.d.map(function(t){return "<li>"+esc(clip(t,m.k==="Role"?125:160))+"</li>"}).join("");
-    var showdt=m.w&&m.w!==m.y;
-    var e=mk("ms","translate3d("+(side*247)+"px,0,"+(-s)+"px) rotateY("+(-side*90)+"deg)",
-      '<div class="sp"></div>'+
-      '<div class="tl"><span class="yr">'+m.y+'</span>'+(showdt?'<span class="dt">'+esc(m.w)+'</span>':"")+'<span class="kd">'+m.k+'</span><h3>'+esc(clip(m.t,38))+'</h3><span class="rd">Hover to read</span></div>'+
-      '<div class="bd"><div class="bhd"><span class="yr">'+m.y+'</span><div><span class="kd">'+m.k+'</span>'+(showdt?'<span class="dt">'+esc(m.w)+'</span>':"")+'</div><span class="no">'+(i+1)+' of '+n+'</span></div>'+
-      '<div class="bbd"><h3>'+esc(m.t)+'</h3>'+(m.s?'<em>'+esc(m.s)+'</em>':"")+'<ul>'+lines+'</ul></div></div>',s);
-    e.setAttribute("data-i",i);msE.push(e);bdE.push(e.querySelector(".bd"));
-    pqE.push(mk("pq","translate3d(0,165px,"+(-s)+"px) rotateX(90deg)","<div>"+m.y+"</div>",s));
-  });
-
-  /* a few drifting lights, and the end wall */
-  for(var k=0;k<30;k++){
-    var ps=Math.random()*(POSMAX+800),sz=6+Math.random()*9;
-    mk("pt","translate3d("+((Math.random()-.5)*420)+"px,"+(-150+Math.random()*260)+"px,"+(-ps)+"px)",
-      '<b style="width:'+sz+'px;height:'+sz+'px;animation-delay:'+(-Math.random()*4)+'s"></b>',ps);
-  }
-  mk("gate","translate3d(0,0,"+(-(L-300))+"px)","<div>Your full CV<br>unrolls here</div>",L-300);
-
-  /* state */
-  var space=$("#space"),cv=$("#cv"),hint=$("#hint"),hy=$("#hy"),hl=$("#hl"),bar=$("#bar i"),stage=$("#stage"),btn=$("#auto");
-  var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion:reduce)").matches;
-  var cur=0,open=false,auto=false,posA=0,lastSet=0,last=0,lastNear=-9;
-  var fi=-1,fidx=0,fw=0,focusScroll=0,fp=[0,0],px=0,py=0,coolUntil=0,dwell=null,shown=[];
-
-  function size(){
-    space.style.height=(POSMAX+innerHeight)+"px";
-    var P=Math.max(650,Math.min(1000,innerWidth*.8));stage.style.perspective=P+"px";
-    var nar=innerWidth<700,bw=nar?320:460,bh=nar?460:330;
-    var dist=201+KS;
-    var k=Math.min(Math.min(innerWidth*.9,900)/bw,innerHeight*.7/bh);
-    var rs=root.style;
-    rs.setProperty("--bw",bw+"px");rs.setProperty("--bh",bh+"px");rs.setProperty("--bs",(k*dist/P).toFixed(4));
-  }
-  function setAuto(v){auto=v;btn.classList.toggle("on",v);btn.textContent=v?"Pause":"Auto-walk";if(v){posA=scrollY;lastSet=scrollY}}
-  function focusOn(i){
-    if(open||fi>=0||fw>.15||Math.abs(SS[i]-cur)>1500)return;
-    if(auto)setAuto(false);
-    fi=i;fidx=i;focusScroll=scrollY;fp=[px,py];body.classList.add("reading");
-  }
-  function release(snap){
-    if(fi<0)return;
-    var i=fi;fi=-1;coolUntil=performance.now()+900;body.classList.remove("reading");
-    if(snap){scrollTo(0,SS[i]);posA=SS[i];lastSet=SS[i]}
-  }
-  function setOpen(v){open=v;cv.classList.toggle("open",v);if(v){release(false);setAuto(false);cv.scrollTop=0}}
-  function onScroll(){
-    if(auto&&Math.abs(scrollY-lastSet)>4)setAuto(false);
-    if(fi>=0&&Math.abs(scrollY-focusScroll)>40)release(false);
-  }
-
-  function frame(t){
-    var dt=Math.min(.05,(t-last)/1000||0);last=t;
-    if(auto&&!open&&fi<0&&fw<.02){posA=Math.min(POSMAX,posA+AUTOV*dt);lastSet=posA;scrollTo(0,posA)}
-    var tgt=auto?posA:scrollY,prog=cl(tgt/POSMAX);
-    hint.style.opacity=tgt>60?0:1;
-    if(fi<0){if(!open&&prog>.985)setOpen(true);else if(open&&prog<.96)setOpen(false)}
-    cur+=reduce?tgt-cur:(tgt-cur)*Math.min(1,dt*5);
-    var ft=fi>=0?1:0;
-    fw+=reduce?ft-fw:(ft-fw)*Math.min(1,dt*3.4);
-    if(Math.abs(fw-ft)<.002)fw=ft;
-    var w=sm(cl(fw)),ii=fidx;
-    var sc=cur+(SS[ii]-cur)*w;                 /* camera distance along the hall */
-    var side=M[ii].side;
-    var yaw=side*w*Math.PI/2,cx=-side*KS*w;    /* turn square to the wall and step back from it */
-    world.style.transform="rotateY("+yaw+"rad) translate3d("+(-cx)+"px,0,"+sc+"px)";
-
-    /* lighting, and which board is open */
-    var near=-1,nd=1e9;
-    for(var i=0;i<M.length;i++){
-      var dp=sc-SS[i],ad=Math.abs(dp);
-      if(ad<nd){nd=ad;near=i}
-      var l=dp<0?sm(cl(1+dp/1400)):sm(cl(1-dp/520));
-      if(l>0||msE[i]._l){var v=l.toFixed(3);msE[i].style.setProperty("--l",v);pqE[i].style.setProperty("--l",v);msE[i]._l=l>0}
-      var sh=(fi===i&&fw>.55);
-      if(sh!==!!shown[i]){shown[i]=sh;msE[i].classList.toggle("show",sh)}
-    }
-    if(sc<SS[0]-500)near=-1;
-
-    /* doors swing open as you approach */
-    var p=sm(cl((sc-(DOOR-460))/340)),a=p*86;
-    doorL.style.transform="rotateY("+a+"deg)";doorR.style.transform="rotateY("+(-a)+"deg)";
-
-    for(var j=0;j<objs.length;j++){
-      var o=objs[j],vis=o.s>sc-700&&o.s<sc+3200;
-      if(vis!==o.v){o.v=vis;o.e.style.display=vis?"":"none"}
-    }
-    if(near!==lastNear){lastNear=near;
-      if(near<0){hy.textContent="Welcome";hl.textContent="Entering the hall"}
-      else{hy.textContent=M[near].y;hl.textContent=M[near].k+": "+clip(M[near].t,34)}}
-    bar.style.width=(prog*100)+"%";
-    requestAnimationFrame(frame);
-  }
-
-  /* wiring */
-  function goEnd(){release(false);setAuto(false);scrollTo({top:POSMAX,behavior:"smooth"})}
-  function goBack(){scrollTo({top:POSMAX*.9,behavior:"smooth"})}
-  addEventListener("scroll",onScroll,{passive:true});
-  addEventListener("resize",size);
-  $("#skip").onclick=goEnd;$("#back").onclick=goBack;
-  $("#cont").onclick=function(){release(true)};
-  btn.onclick=function(){if(!open){release(false);setAuto(!auto)}};
-  cv.addEventListener("wheel",function(e){if(e.deltaY<0&&cv.scrollTop<=0)goBack()},{passive:true});
-  addEventListener("wheel",function(){if(fi>=0)release(true)},{passive:true});
-  addEventListener("keydown",function(e){
-    if(e.key==="Escape"){if(fi>=0)release(true);else if(open)goBack()}
-    if(e.key===" "&&!open){e.preventDefault();if(fi>=0)release(true);else setAuto(!auto)}
-  });
-  /* hover a tile: after a short pause the camera walks over, turns and opens it */
-  addEventListener("mousemove",function(e){
-    px=e.clientX;py=e.clientY;
-    if(fi>=0&&fw>.85){
-      var r=bdE[fi].getBoundingClientRect(),m=40;
-      var out=px<r.left-m||px>r.right+m||py<r.top-m||py>r.bottom+m;
-      if(out&&Math.hypot(px-fp[0],py-fp[1])>80)release(true);
-    }
-  });
-  stage.addEventListener("mouseover",function(e){
-    var tl=e.target.closest&&e.target.closest(".tl");if(!tl)return;
-    var i=+tl.parentNode.getAttribute("data-i");clearTimeout(dwell);
-    dwell=setTimeout(function(){if(performance.now()>coolUntil)focusOn(i)},220);
-  });
-  stage.addEventListener("mouseout",function(e){if(e.target.closest&&e.target.closest(".tl"))clearTimeout(dwell)});
-  stage.addEventListener("click",function(e){
-    var tl=e.target.closest(".tl");
-    if(tl){focusOn(+tl.parentNode.getAttribute("data-i"));return}
-    if(fi>=0&&!e.target.closest(".bd"))release(true);
-  });
-
-  root.classList.add("js");          /* 3D mode is on only after everything above succeeded */
-  size();requestAnimationFrame(frame);
+function resize(){
+  renderer.setSize(innerWidth,innerHeight);
+  cam.aspect=innerWidth/innerHeight;cam.fov=cam.aspect<1?72:55;cam.updateProjectionMatrix();
+  space.style.height=(maxScroll+innerHeight)+"px";
+  const p=portraitNow();BW=p?3.4:5.6;BH=p?4.5:4;CW=p?1020:1400;CH=p?1350:1000;
+  boards.forEach(b=>{b.geometry.dispose();b.geometry=new THREE.PlaneGeometry(BW,BH);if(b.material.map){b.material.map.dispose();b.material.map=null;b.material.needsUpdate=true}});
+  const tv=Math.tan(cam.fov*Math.PI/360);
+  dist=cl(Math.max(BH/.82/(2*tv),BW/.82/(2*tv*cam.aspect)),3.3,7.3);
+}
+const setAuto=v=>{auto=v;btn.classList.toggle("on",v);btn.textContent=v?"❚❚ Pause":"▶ Auto-walk";if(v){posA=scrollY;lastSet=scrollY}};
+function setOpen(v){open=v;cv.classList.toggle("open",v);if(v){release(false);setAuto(false);cv.scrollTop=0}}
+function focusOn(i){
+  if(open||fi>=0||fw>.15||Math.abs(SS[i]-sc)>24)return;
+  const b=boards[i];
+  if(!b.material.map){const t=mkt(boardCanvas(M[i],i));b.material.map=t;b.material.needsUpdate=true}
+  b.visible=true;fi=i;fidx=i;fpt=[mx,my];missT=0;document.body.classList.add("reading");
+}
+function release(snap){
+  if(fi<0)return;
+  const i=fi;fi=-1;coolUntil=performance.now()+900;document.body.classList.remove("reading");
+  if(snap){const y=(SS[i]-S0)*PXU;scrollTo(0,y);posA=y;lastSet=y}
+}
+function onScroll(){
+  if(auto&&Math.abs(scrollY-lastSet)>4)setAuto(false);
+  if(fi>=0&&Math.abs(scrollY-(SS[fi]-S0)*PXU)>260)release(false);
 }
 
-try{buildCorridor()}catch(err){root.classList.remove("js");showError(err.message+" (3D disabled, showing the plain CV)")}
-})();
+/* ---------- 9. main loop ---------- */
+function frame(t){
+  const dt=Math.min(.05,(t-last)/1000||.016);last=t;
+  if(auto&&!open&&fi<0&&fw<.02){posA=Math.min(maxScroll,posA+AUTOV*PXU*dt);lastSet=posA;scrollTo(0,posA)}
+  const base=auto?posA:scrollY,prog=cl(base/maxScroll);
+  const tgt=S0+base/PXU;
+  hint.style.opacity=base>60?0:1;
+  if(fi<0&&fw<.05){if(!open&&prog>.985)setOpen(true);else if(open&&prog<.96)setOpen(false)}
+  sc+=reduce?tgt-sc:(tgt-sc)*(1-Math.exp(-dt*5));
+  const ft=fi>=0?1:0;fw+=reduce?ft-fw:(ft-fw)*(1-Math.exp(-dt*3));if(Math.abs(ft-fw)<.003)fw=ft;
+  const w=sm(fw),ii=fidx,side=M[ii].side;
+
+  /* camera: follow the path; when reading, slide to the wall and face it square */
+  const sE=sc+(SS[ii]-sc)*w,p=at(sE),rx=Math.cos(p[2]),rz=Math.sin(p[2]);
+  const lat=-side*(dist-W/2)*w,bob=reduce?0:Math.sin(sc*1.9)*.035*(1-w);
+  cam.position.set(p[0]+rx*lat,EYE+(2.5-EYE)*w+bob,p[1]+rz*lat);
+  const f=at(sE+9),wp=at(SS[ii]);
+  const tx=wp[0]+Math.cos(wp[2])*side*W/2,tz=wp[1]+Math.sin(wp[2])*side*W/2;
+  cam.lookAt(f[0]+(tx-f[0])*w,EYE-.05+(2.5-EYE+.05)*w,f[1]+(tz-f[1])*w);
+  lamp.position.copy(cam.position);lamp.position.y+=1.2;
+
+  /* doors swing open as you approach */
+  const a=sm(cl((sc-(DOOR-9))/6))*1.45;doorL.rotation.y=a;doorR.rotation.y=-a;
+
+  /* tiles, boards, plaques, glow */
+  let near=-1,nd=1e9;
+  const bo=cl((fw-.35)/.5);
+  M.forEach((m,i)=>{
+    const dp=sc-SS[i],ad=Math.abs(dp);
+    groups[i].visible=ad<64;
+    if(ad<nd){nd=ad;near=i}
+    const l=dp<0?sm(cl(1+dp/16)):sm(cl(1-dp/8));
+    tiles[i].material.color.setScalar(.84+.16*l);
+    plaques[i].material.opacity=.65+.35*l;
+    const mine=(i===fidx);
+    tiles[i].material.opacity=mine?1-bo:1;
+    boards[i].material.opacity=mine?bo:0;
+  });
+  if(fi<0&&fw<.01)boards.forEach(b=>{if(b.visible){b.visible=false;if(b.material.map){b.material.map.dispose();b.material.map=null;b.material.needsUpdate=true}}});
+  if(sc<SS[0]-15)near=-1;
+  if(near!==lastNear){lastNear=near;
+    if(near<0){hy.textContent="Welcome";hl.textContent="Entering the hall…"}
+    else{hy.textContent=M[near].y;hl.textContent=M[near].k+" · "+clip(M[near].t,34)}}
+  bar.style.width=prog*100+"%";
+
+  /* dust drift */
+  const tt=t/1000;for(let i=0;i<NP;i++)dp[i*3+1]=dbase[i][0]+Math.sin(tt*.6+dbase[i][1])*.25;dg.attributes.position.needsUpdate=true;
+
+  /* leaving the board with the mouse */
+  if(fi>=0&&fw>.9&&!matchMedia("(hover:none)").matches){
+    ray.setFromCamera(mouse,cam);
+    const hit=ray.intersectObject(boards[fi]).length>0;
+    if(hit)missT=0;else if(Math.hypot(mx-fpt[0],my-fpt[1])>110){missT+=dt;if(missT>.5)release(true)}
+  }
+  renderer.render(scene,cam);
+  requestAnimationFrame(frame);
+}
+
+/* ---------- 10. wiring ---------- */
+function tileAt(x,y){
+  mouse.set(x/innerWidth*2-1,-(y/innerHeight*2-1));ray.setFromCamera(mouse,cam);
+  const vis=tiles.filter((_,i)=>groups[i].visible&&Math.abs(SS[i]-sc)<24);
+  const h=ray.intersectObjects(vis)[0];return h?h.object.userData.i:-1;
+}
+renderer.domElement.addEventListener("mousemove",e=>{
+  mx=e.clientX;my=e.clientY;mouse.set(mx/innerWidth*2-1,-(my/innerHeight*2-1));
+  if(fi>=0){renderer.domElement.style.cursor="default";return}
+  const i=tileAt(mx,my);renderer.domElement.style.cursor=i>=0?"pointer":"default";
+  clearTimeout(dwell);
+  if(i>=0)dwell=setTimeout(()=>{if(performance.now()>coolUntil)focusOn(i)},260);
+});
+renderer.domElement.addEventListener("click",e=>{
+  mx=e.clientX;my=e.clientY;
+  if(fi>=0){mouse.set(mx/innerWidth*2-1,-(my/innerHeight*2-1));ray.setFromCamera(mouse,cam);if(!ray.intersectObject(boards[fi]).length)release(true);return}
+  const i=tileAt(mx,my);if(i>=0)focusOn(i);
+});
+addEventListener("scroll",onScroll,{passive:true});
+addEventListener("resize",resize);
+addEventListener("wheel",()=>{if(fi>=0)release(false)},{passive:true});
+addEventListener("keydown",e=>{
+  if(e.key==="Escape"){if(fi>=0)release(true);else if(open)goBack()}
+  if(e.key===" "&&!open){e.preventDefault();if(fi>=0)release(true);else setAuto(!auto)}
+});
+const goEnd=()=>{release(false);setAuto(false);scrollTo({top:maxScroll,behavior:"smooth"})};
+const goBack=()=>scrollTo({top:maxScroll*.9,behavior:"smooth"});
+$("#skip").onclick=goEnd;$("#back").onclick=goBack;$("#cont").onclick=()=>release(true);
+btn.onclick=()=>{if(!open){release(false);setAuto(!auto)}};
+cv.addEventListener("wheel",e=>{if(e.deltaY<0&&cv.scrollTop<=0)goBack()},{passive:true});
+
+resize();requestAnimationFrame(frame);
+if(!reduce)setTimeout(()=>{if(scrollY<5&&!open)setAuto(true)},900);
+}
 </script>
 </body>
 </html>
