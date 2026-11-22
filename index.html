@@ -18,37 +18,37 @@ nav a{padding:.35rem .65rem;border:1px solid transparent;border-radius:8px;color
 nav a:hover,nav a.on{color:#F7F8F5;background:rgba(22,125,141,.16);border-color:rgba(22,125,141,.42)}
 nav a.glow-button{color:#F7F8F5;background:rgba(22,125,141,.18);border-color:rgba(22,125,141,.55)}
 
-/* ---- world ---- */
+/* ---- 3D world ---- */
 #space{width:1px}
 #stage{position:fixed;inset:0;overflow:hidden;perspective:800px;background:#fff}
 #world{position:absolute;left:50%;top:52%;width:0;height:0;transform-style:preserve-3d;will-change:transform}
 #world>*{position:absolute;left:0;top:0;transform-style:preserve-3d}
 .g i{position:absolute;left:0;top:0;display:block;transform-origin:0 0}
-.fl{width:500px;height:110px;transform:translate3d(-250px,170px,-105px) rotateX(90deg);background:linear-gradient(90deg,#cfd7d7 1px,transparent 1px) 0 0/62.5px 100%,#e9eded}
-.fl .fp{position:absolute;left:190px;width:120px;top:0;bottom:0;background:repeating-linear-gradient(180deg,#0b5d63 0 74px,transparent 74px 100px)}
+.fl{width:500px;height:104px;transform:translate3d(-250px,170px,-100px) rotateX(90deg);border-top:1px solid #cdd6d6;
+ background:linear-gradient(90deg,#cfd7d7 1px,transparent 1px) 0 0/62.5px 100%,#e9eded}
+.fl .fp{position:absolute;left:190px;width:120px;top:0;height:72px;background:#0b5d63;border-radius:4px}
 .fl::before,.fl::after{content:"";position:absolute;top:0;bottom:0;width:6px;background:radial-gradient(circle,#d79a2e 2.5px,transparent 3.5px) 0 0/6px 50px}
 .fl::before{left:177px}.fl::after{left:317px}
-.cl{width:500px;height:110px;transform:translate3d(-250px,-170px,5px) rotateX(-90deg);background:#f3f6f6}
-.cl .lt{position:absolute;left:190px;top:10px;width:120px;height:80px;background:#fff;box-shadow:0 0 40px 22px rgba(255,232,180,.75)}
-.wl{width:110px;height:340px;background:linear-gradient(#fff 0,#f9fbfb 64%,#e2e9e9 64%,#e2e9e9 93%,#a9b8b8 93%)}
-.wl::before{content:"";position:absolute;left:0;right:0;top:36%;height:2px;background:rgba(11,93,99,.25)}
-.wl::after{content:"";position:absolute;top:0;bottom:0;right:0;border-right:1px solid #dde5e5}
-.wl.l{transform:translate3d(-250px,-170px,5px) rotateY(90deg)}
-.wl.r{transform:translate3d(250px,-170px,-105px) rotateY(-90deg);background:linear-gradient(#f6f9f9 0,#f1f5f5 64%,#dae2e2 64%,#dae2e2 93%,#a0b0b0 93%)}
+.cl{width:500px;height:104px;transform:translate3d(-250px,-170px,4px) rotateX(-90deg);background:#f3f6f6}
+.cl .lt{position:absolute;left:190px;top:12px;width:120px;height:80px;background:#fff;box-shadow:0 0 40px 22px rgba(255,232,180,.8)}
+.wl{width:104px;height:340px;background:linear-gradient(#fff 0,#f9fbfb 78%,#e2e9e9 78%,#e2e9e9 94%,#a9b8b8 94%);border-right:1px solid #dde5e5}
+.wl::before{content:"";position:absolute;left:0;right:0;top:12%;height:2px;background:rgba(11,93,99,.25)}
+.wl.l{transform:translate3d(-250px,-170px,4px) rotateY(90deg)}
+.wl.r{transform:translate3d(250px,-170px,-100px) rotateY(-90deg);background:linear-gradient(#f6f9f9 0,#f1f5f5 78%,#dae2e2 78%,#dae2e2 94%,#a0b0b0 94%)}
 
-/* milestone: tile + board on the wall */
+/* milestone tile + board on the wall */
 .ms .tl,.ms .bd{position:absolute;background:#fff;border-radius:6px}
-.ms .tl{left:-85px;top:-62px;width:170px;height:124px;padding:10px 14px;cursor:pointer;
+.ms .tl{left:-85px;top:-66px;width:170px;height:132px;padding:10px 14px;cursor:pointer;overflow:hidden;
  border:1px solid rgba(11,93,99,calc(.2 + var(--l,0)*.7));
  box-shadow:0 8px 26px rgba(11,93,99,calc(.08 + var(--l,0)*.3));
  transform:translateZ(calc(14px + var(--l,0)*12px));opacity:calc(.6 + var(--l,0)*.4)}
-.yr{display:block;font:700 2.3rem/1 Georgia,serif;color:var(--sig)}
+.yr{display:block;font:700 2.2rem/1 Georgia,serif;color:var(--sig)}
 .kd{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);font-weight:600}
-.tl h3{font-size:.92rem;margin:.3rem 0 0}
+.tl h3{font-size:.86rem;margin:.3rem 0 0}
 .bd{left:-200px;top:-140px;width:400px;height:280px;padding:16px 22px;overflow:hidden;opacity:0;pointer-events:none;
  border:1px solid #cfd9d9;box-shadow:0 24px 60px rgba(0,0,0,.28);
  transform:translateZ(14px) scale(.3) rotateX(45deg);transition:transform .5s cubic-bezier(.2,1.3,.4,1),opacity .3s}
-.ms:hover .bd,.ms.tap .bd{opacity:1;pointer-events:auto;transform:translateZ(36px) scale(1) rotateX(0)}
+.ms:hover .bd,.ms.tap .bd{opacity:1;pointer-events:auto;transform:translateZ(40px) scale(1) rotateX(0)}
 .bd h3{font-size:1.15rem}.bd em{display:block;color:var(--acc);font-size:.84rem;margin-bottom:.3rem}
 .bd ul{margin:.3rem 0 0;padding-left:1.1rem;font-size:.8rem;line-height:1.4;color:#33464d}
 .bd li{margin-bottom:.25rem}
@@ -60,8 +60,8 @@ nav a.glow-button{color:#F7F8F5;background:rgba(22,125,141,.18);border-color:rgb
  background:radial-gradient(circle,#fff 30%,#fdf1d9);font:700 2rem Georgia,serif;color:var(--sig);box-shadow:0 0 140px 80px #fff}
 
 .fog{position:fixed;inset:0;z-index:5;pointer-events:none;
- background:radial-gradient(ellipse 36% 44% at 50% 52%,rgba(255,255,255,.97) 0,rgba(255,255,255,0) 100%),radial-gradient(ellipse at 50% 50%,transparent 60%,rgba(11,93,99,.1) 100%)}
-#hud{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:.7rem 1.2rem;display:flex;align-items:center;gap:1rem;color:var(--mute);font-size:.85rem;background:linear-gradient(transparent,rgba(255,255,255,.9))}
+ background:radial-gradient(ellipse 15% 20% at 50% 52%,rgba(255,255,255,.95) 0,rgba(255,255,255,0) 100%),radial-gradient(ellipse at 50% 50%,transparent 62%,rgba(11,93,99,.08) 100%)}
+#hud{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:.7rem 1.2rem;display:flex;align-items:center;gap:1rem;color:var(--mute);font-size:.85rem;background:linear-gradient(transparent,rgba(255,255,255,.92))}
 #hud b{font:700 1.5rem Georgia,serif;color:var(--sig);min-width:3.4ch}
 #bar{flex:1;height:3px;background:#dbe3e2;border-radius:3px;overflow:hidden}#bar i{display:block;height:100%;width:0;background:var(--sig)}
 #mm{width:120px;height:56px}
@@ -122,7 +122,94 @@ footer{padding:1rem 0 2rem;color:var(--mute);font-size:.85rem}
 </div></main>
 
 <script>
-/* ===== PASTE YOUR const D={ ... }; BLOCK HERE (from the previous version) ===== */
+/* visible error box, so a failure is never a silent blank page */
+addEventListener("error",e=>{const d=document.createElement("div");
+ d.style.cssText="position:fixed;top:70px;left:10px;right:10px;z-index:99;background:#fee;color:#900;padding:10px;border:1px solid #900;font:13px monospace";
+ d.textContent="Script error: "+e.message+" (line "+e.lineno+")";document.body.appendChild(d)});
+
+/* ===== YOUR CV DATA ===== */
+const D={
+education:[
+["2022–2024","Master of Public Health (Distinction)","Central Department of Public Health, Institute of Medicine, Tribhuvan University"],
+["2015–2019","Bachelor in Public Health (First Division)","Maharajgunj Medical Campus, Institute of Medicine, Tribhuvan University"],
+["2013","General Science, +2 (Distinction)","Morgan International College, HSEB"],
+["2011","School Leaving Certificate (Distinction)","Sagarmatha Higher Secondary English Boarding School, Udayapur"]
+],
+jobs:[
+{y:"Jan 2026 - Present",t:"Public Health Officer",o:"Epidemiology and Disease Control Division, Department of Health Services, Government of Nepal",b:[
+"Led preparation of national documents: the M&E framework for epidemic management, water quality surveillance reference packages and the M&E checklist for health insurance.",
+"Support drafting of national policies, strategies, standards, protocols and guidelines on epidemiology, outbreak management and health emergency preparedness.",
+"Coordinate with federal, provincial, local and multi-sectoral authorities on epidemiological management, disaster response and annual work plans.",
+"Monitor and supervise surveillance, outbreak preparedness and disaster management programs, with timely feedback.",
+"Supported Mass Drug Administration (MDA) coverage surveys in Rautahat District, including field data collection and monitoring.",
+"Facilitator for the five-day Rapid Response Team (RRT) training."]},
+{y:"Oct 2024 - Jan 2026",t:"Public Health Officer",o:"Ministry of Health, Bagmati Province",b:[
+"Contributed to provincial health policies and strategies, including the provincial population policy and health strategic framework.",
+"Monitored, supervised and evaluated public health programs across provincial and local levels.",
+"Coordinated multi-sectoral work on immunisation, maternal and child health, adolescent health, disease prevention, nutrition and environmental health.",
+"Coordinated and evaluated programs run by national and international NGOs in the province.",
+"Built a Kobo Toolbox reporting channel to track program indicators and led operation of GIOMS and HRRS.",
+"Documentation, reporting, annual budget plan, providing trainings, etc."]},
+{y:"Nov 2023 - Feb 2024",t:"Monitoring and Evaluation Officer (part-time)",o:"Creative Solution for Health Pvt Ltd",b:[
+"Baseline study of maternal and newborn health in Kalikot District.",
+"Monitored surveys and data quality, reviewing recorded interviews and giving daily feedback to enumerators and supervisors.",
+"Cleaned and analysed data in SPSS."]},
+{y:"Sep - Nov 2023",t:"Intern",o:"Nepal CRS Company",b:["Supported M&E and program teams on the Momentum Private Healthcare Delivery project, including field activities and monthly reports."]},
+{y:"Jun - Jul 2023",t:"Public Health Consultant (part-time)",o:"Budhanilkantha Municipality, Kathmandu",b:["Developed the municipality’s health contingency plan and held stakeholder meetings."]},
+{y:"Dec 2020 - Apr 2022",t:"Officer, Monitoring and Evaluation",o:"Karuna Foundation Nepal, Morang",b:[
+"Disability Prevention and Rehabilitation Program (DPRP).",
+"Supported the program team in developing annual work plans aligned with program activities.",
+"Led implementation of the Management Information System (MIS) in the municipalities.",
+"Coordinated with provincial and central teams on baseline, mid-line and end-line surveys and led local data validation.",
+"Conducted field visits to review implementation of M&E standards and provided technical backstopping.",
+"Ensured timely reporting to provincial and central offices and promoted the use of reporting tools and templates."]},
+{y:"Dec 2019 - Nov 2020",t:"Associate Officer, Program (Lead M&E)",o:"Karuna Foundation Nepal, Sunsari",b:["Scaling up WASH in Nepal: planned, monitored and reported on WASH, SRHR, health, nutrition, gender and livelihood activities."]},
+{y:"Jun - Dec 2019",t:"Monitoring and Evaluation Officer",o:"Global Action Nepal, Lamjung",b:["Sister for Sisters’ Education: collected and validated district data and gave feedback.","Developed and implemented a monitoring plan and led technical M&E support."]},
+{y:"May 2019",t:"Field Researcher",o:"Partnership for Social Development",b:["End-line survey on maternal, neonatal and child health in Jajarkot District: quantitative and qualitative data collection and analysis."]},
+{y:"Apr - Aug 2018",t:"Intern",o:"Karuna Foundation Nepal, Rasuwa",b:["Holistic Development Project: ran workshops on inclusive and peer-to-peer education.","Assisted with health post construction follow-up, menstrual health management, SRHR and early childhood development."]}
+],
+pubs:[
+["original","Karki P, Sapkota KP, Pradhan PMS, Suvedi BK, Bhurtyal A. Successful aging and its associated factors among older adults in Nepal: a cross-sectional study. <em>BMC Geriatrics</em>. 2025;25:657.","10.1186/s12877-025-06335-4"],
+["original","Karki P, Shahi PV, Sapkota KP, Bhandari R, Adhikari N, Shrestha B. Depressive symptoms and associated factors among persons with physical disabilities in disability care homes of Kathmandu district, Nepal: a mixed method study. <em>PLOS Global Public Health</em>. 2023;3(1):e0001461.","10.1371/journal.pgph.0001461"],
+["original","Gaire M, Gautam L, Karki P, Poudel L, Khanal S. Dating violence prevalence and factors associated among undergraduate public health students of Kathmandu metropolitan city, Nepal: a cross-sectional study. <em>BMJ Open</em>. 2024;14:e081516.","10.1136/bmjopen-2023-081516"],
+["original","Bucha B, Karki P, Singh PM. Nutritional status of under five children and its associated factors in urban slums of Kathmandu Valley, Nepal. <em>One Health Journal of Nepal</em>. 2023;3(5):11–17.",""],
+["gbd","GBD 2021 Diarrhoeal Diseases Collaborators. Global, regional, and national age-sex-specific burden of diarrhoeal diseases, their risk factors, and aetiologies, 1990–2021, for 204 countries and territories. <em>The Lancet Infectious Diseases</em>. 2025.","10.1016/S1473-3099(24)00691-1"],
+["gbd","GBD 2021 Smoking Collaborators. Forecasting the effects of smoking prevalence scenarios on years of life lost and life expectancy from 2022 to 2050. <em>The Lancet Public Health</em>. 2024.","10.1016/S2468-2667(24)00166-X"],
+["gbd","GBD 2021 Stroke Collaborators. Global, regional, and national burden of stroke and its risk factors, 1990–2021. <em>The Lancet Neurology</em>. 2024.","10.1016/S1474-4422(24)00369-7"],
+["gbd","GBD 2022 Cardiovascular Disease Collaborators. Global burden of cardiovascular diseases and risks, 1990–2022. <em>Journal of the American College of Cardiology</em>. 2023.","10.1016/j.jacc.2023.11.007"],
+["review","Undiagnosed hypertension and its associated factors: a cross-sectional study among adults in a rural municipality of Nepal.",""],
+["review","Depressive symptoms and suicidal attempts in sexual and gender minorities and heterosexual cisgender people of Nepal: a mixed-methods study.",""],
+["review","Parent-adolescent communication on sexual and reproductive health and its associated factors in Jhapa, Nepal: a cross-sectional study.",""],
+["review","Determinants of successful aging in Western Nepal: a cross-sectional study (in preparation).",""]
+],
+review:[
+["INQUIRY: The Journal of Health Care Organization, Provision, and Financing","4 articles"],
+["BMC Geriatrics","2 articles"],["PLOS Global Public Health","2 articles"],
+["Journal of Nepal Medical Association (JNMA)","1 article"],["BJPsych International","1 article"],
+["BMC Psychology","1 article"],["Discover Public Health","1 article"],["GBD Senior Collaborator","Named collaborator"]
+],
+awards:[
+["2026 to present","Data Fellowship","Code for Nepal with DataCamp and TechPana (R for Data Scientists)"],
+["2023","Sigma Xi Grants-in-Aid of Research","Principal Investigator"],
+["2023","DsAcademy Seed Grant","Principal Investigator"],
+["2022–2024","Postgraduate Scholarship (fully funded)","Medical Education Commission, Government of Nepal, for the MPH"],
+["2019","Poster Presentation, Bronze Medal","National Young Scientist Conference 2019, RECAST"]
+],
+training:[
+["2026","ToT, Rapid Response Team (RRT) Training",""],
+["2026","ToT, Community Based Surveillance Program (SORMAS)",""],
+["2022","Research Data Analysis with R","30 hours, online"],
+["2020","DHIS2 Training","Provincial Health Directorate, Koshi Province"],
+["2019","Advanced Excel Training","Mentor Institute of Technologies"],
+["2018","Conference on Accelerating the Implementation of ICPD","IYAFP-Nepal"]
+],
+volunteer:[
+["2016–2017","Visible Impact Nepal","No Shame To Bleed campaign: helped develop a menstrual health management manual and ran school workshops"],
+["2015","Earthquake response","Volunteered in disaster management"],
+["Member","Physicians for Social Responsibility Nepal, Nepal Public Health Students’ Society, International Youth Alliance for Family Planning",""]
+],
+skills:["R","SPSS","Epidata","DHIS2","Kobo Toolbox","Advanced Excel","MS Access","EndNote","Zotero","Nepali typing","Driving License Two & Four wheeler"]
+};
 
 const $=s=>document.querySelector(s);
 const yr=s=>(String(s).match(/\d{4}/)||[""])[0];
@@ -131,13 +218,14 @@ const strip=h=>h.replace(/<[^>]+>/g,"");
 
 /* 1. milestones, oldest first */
 const M=[];
-D.education.slice().reverse().forEach(e=>M.push({y:yr(e[0]),k:"Education",t:e[1],s:e[2],d:[]}));
+D.education.slice().reverse().forEach(e=>M.push({y:yr(e[0]),k:"Education",t:e[1],s:e[2],w:e[0],d:[]}));
 D.jobs.slice().reverse().forEach(j=>M.push({y:yr(j.y),k:"Role",t:j.t,s:j.o,w:j.y,d:j.b.slice(0,3)}));
-D.awards.slice().reverse().forEach(a=>M.push({y:yr(a[0]),k:"Award",t:a[1],s:a[2],d:[]}));
-D.pubs.filter(p=>p[0]==="original").forEach(p=>{const c=strip(p[1]);M.push({y:(c.match(/\b(20\d\d)\b/)||["",""])[1],k:"Publication",t:c.split(". ")[1],s:"",d:[c]})});
+D.awards.slice().reverse().forEach(a=>M.push({y:yr(a[0]),k:"Award",t:a[1],s:a[2],w:a[0],d:[]}));
+D.pubs.filter(p=>p[0]==="original").forEach(p=>{const c=strip(p[1]),parts=c.split(". ");
+  M.push({y:(c.match(/\b(20\d\d)\b/)||["",""])[1],k:"Publication",t:parts[1]||c,s:parts[2]||"",d:[c]})});
 M.sort((a,b)=>a.y-b.y);
 
-/* 2. the curved path: heading = A·sin(s/R) */
+/* 2. curved path: heading = A·sin(s/R) */
 const A=.6,R=1500,ST=20,S=100,GAP=480,START=700,n=M.length,L=START+n*GAP+700,MAXD=L-420;
 const hd=s=>A*Math.sin(s/R);
 const PX=[0],PZ=[0];
@@ -146,18 +234,22 @@ const at=s=>{const f=Math.max(0,s)/ST,i=Math.floor(f),t=f-i;return[PX[i]+(PX[i+1
 
 /* 3. build the world */
 const world=$("#world"),objs=[],lit=[];
-const mk=(cls,tf,html,s,isLit)=>{const e=document.createElement("div");e.className="o "+cls;e.style.transform=tf;e.innerHTML=html||"";world.appendChild(e);const o={e,s,v:true};objs.push(o);if(isLit)lit.push(o);return o};
+const mk=(cls,tf,html,s,isLit)=>{const e=document.createElement("div");e.className="o "+cls;e.style.transform=tf;e.innerHTML=html||"";
+  world.appendChild(e);const o={e,s,v:true};objs.push(o);if(isLit)lit.push(o);return o};
 for(let i=0;i<=L/S;i++){
   const [x,z]=at(i*S),h=hd(i*S+S/2);
-  const g=mk("g",`translate3d(${x}px,0,${z}px) rotateY(${-h}rad)`,`<i class="fl"><b class="fp"></b></i><i class="cl">${i%2?"":'<b class="lt"></b>'}</i><i class="wl l"></i><i class="wl r"></i>`,i*S+50);
+  mk("g",`translate3d(${x}px,0,${z}px) rotateY(${-h}rad)`,
+   `<i class="fl">${i%2?"":'<b class="fp"></b>'}</i><i class="cl">${i%2?"":'<b class="lt"></b>'}</i><i class="wl l"></i><i class="wl r"></i>`,i*S+50);
 }
+/* stepping stones: draw on every segment so the path is continuous */
+document.querySelectorAll(".fl").forEach(f=>{if(!f.querySelector(".fp"))f.insertAdjacentHTML("afterbegin",'<b class="fp"></b>')});
 M.forEach((m,i)=>{
   const s=START+i*GAP,side=i%2?1:-1,[x,z,h]=at(s);
-  const lines=(m.d.length?m.d:[]).map(t=>`<li>${clip(t,m.k==="Publication"?260:150)}</li>`).join("");
+  const lines=m.d.map(t=>`<li>${clip(t,m.k==="Publication"?260:150)}</li>`).join("");
   mk("ms",`translate3d(${x}px,0,${z}px) rotateY(${-h}rad) translate3d(${side*247}px,0,0) rotateY(${-side*90}deg)`,
-   `<div class="tl"><span class="yr">${m.y}</span><span class="kd">${m.k}</span><h3>${clip(m.t,46)}</h3></div>
+   `<div class="tl"><span class="yr">${m.y}</span><span class="kd">${m.k}</span><h3>${clip(m.t,40)}</h3></div>
     <div class="bd"><span class="kd">${m.k} · ${m.w||m.y}</span><h3>${m.t}</h3>${m.s?`<em>${m.s}</em>`:""}<ul>${lines}</ul></div>`,s,true);
-  mk("pq",`translate3d(${x}px,169px,${z}px) rotateY(${-h}rad) rotateX(90deg)`,`<div>${m.y}</div>`,s,true);
+  mk("pq",`translate3d(${x}px,165px,${z}px) rotateY(${-h}rad) rotateX(90deg)`,`<div>${m.y}</div>`,s,true);
 });
 for(let i=0;i<36;i++){
   const s=Math.random()*(MAXD+800),[x,z,h]=at(s),sz=6+Math.random()*9;
@@ -178,7 +270,7 @@ const space=$("#space"),cv=$("#cv"),hint=$("#hint"),hy=$("#hy"),bar=$("#bar i"),
 const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
 let cur=0,tgt=0,prog=0,open=false,auto=false;
 const size=()=>{space.style.height=(n*60+120)+"vh";stage.style.perspective=Math.max(650,Math.min(1000,innerWidth*.8))+"px"};
-const setOpen=v=>{open=v;cv.classList.toggle("open",v);if(v){auto=false;$("#auto").classList.remove("on");cv.scrollTop=0}};
+const setOpen=v=>{open=v;cv.classList.toggle("open",v);if(v){auto=false;$("#auto").classList.remove("on");$("#auto").textContent="▶ Auto-walk";cv.scrollTop=0}};
 function onScroll(){
   const max=document.documentElement.scrollHeight-innerHeight;
   prog=max>0?Math.min(1,Math.max(0,scrollY/max)):0;tgt=prog*MAXD;
@@ -191,12 +283,12 @@ function frame(){
   const [x,z]=at(cur),h=hd(cur+140),dh=A/R*Math.cos(cur/R);
   const bob=reduce?0:Math.sin(cur*.03)*3,roll=reduce?0:-dh*2600;
   world.style.transform=`rotateZ(${roll}deg) rotateY(${h}rad) translate3d(${-x}px,${bob}px,${-z}px)`;
-  objs.forEach(o=>{const v=o.s>cur-350&&o.s<cur+3100;if(v!==o.v){o.v=v;o.e.style.display=v?"":"none"}});
+  objs.forEach(o=>{const v=o.s>cur-600&&o.s<cur+3100;if(v!==o.v){o.v=v;o.e.style.display=v?"":"none"}});
   let best=0,by=hy.textContent;
-  lit.forEach(o=>{const d=o.s-cur;let l=d>=0?1-Math.min(d/900,1):1-Math.min(-d/350,1);l=l*l*(3-2*l);
-    o.e.style.setProperty("--l",l.toFixed(3));if(l>best&&o.e.classList.contains("ms")){best=l;by=M[lit.indexOf(o)>>1].y}});
+  lit.forEach((o,k)=>{const d=o.s-cur+150;let l=d>=0?1-Math.min(d/900,1):1-Math.min(-d/350,1);l=l*l*(3-2*l);
+    o.e.style.setProperty("--l",l.toFixed(3));if(l>best&&(k%2===0)){best=l;by=M[k>>1].y}});
   hy.textContent=by;bar.style.width=prog*100+"%";
-  dot.setAttribute("cx",sx(-at(cur)[1]).toFixed(1));dot.setAttribute("cy",sy(at(cur)[0]).toFixed(1));
+  const p=at(cur);dot.setAttribute("cx",sx(-p[1]).toFixed(1));dot.setAttribute("cy",sy(p[0]).toFixed(1));
   requestAnimationFrame(frame);
 }
 
